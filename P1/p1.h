@@ -15,15 +15,15 @@ private:
     string *a;
     int count;
     int listCapacity;
-    int listSize;
+    int listsize;
 public:
     stringList (int listCapacity = 100);
     ~stringList ();
-    bool insert (string text);
-    bool add (string text);
-    bool insertAt (int index,string text);
+    bool insert (string text); //parker
+    bool add (string text); //parker 
+    bool insertAt (int index,string text); //parker
     void clear();
     void printIt() const;
-    int readAt(int index) const;
+    int readAt(int index) const; //parker
     int count() const;
 };
