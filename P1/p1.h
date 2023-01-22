@@ -12,11 +12,18 @@ using namespace std;
 
 class stringList {
 private:
+    string *a;
     int count;
-    int capacity;
-    String *a;
+    int listCapacity;
+    int listSize;
 public:
-    stringList (int capacity = 100);
+    stringList (int listCapacity = 100);
     ~stringList ();
-    bool insert (String inStr);
+    bool insert (string text);
+    bool add (string text);
+    bool insertAt (int index,string text);
+    void clear();
+    void printIt() const;
+    int readAt(int index) const;
+    int count() const;
 };
