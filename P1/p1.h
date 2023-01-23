@@ -1,29 +1,24 @@
 /*
-Author: Zachary Rea
-Professor Wheat
-January 21st 2023
-Program 1
+Filename: p1.h
+Author(s): Zachary Rea and Parker Ross
+Date: 22 January 2023
+Description: The header file for p1
 */
-#include <iostream>
-#include <fstream>
-#include <string.h>
-
-using namespace std;
-
 class stringList {
 private:
     string *a;
-    int count;
     int listCapacity;
-    int listsize;
+    int listSize;
 public:
-    stringList (int listCapacity = 100);
-    ~stringList ();
+    stringList (int listCapacity = 100);//Zach
+    ~stringList ();//Zach
     bool insert (string text); //parker
     bool add (string text); //parker 
     bool insertAt (int index,string text); //parker
-    void clear();
-    void printIt() const;
+    bool deleteAt (int index,string text);
+    void clear();//Zach
+    void printIt() const;//Zach
+    int getIndex(string text) const;
     int readAt(int index) const; //parker
-    int count() const;
+    int count() const;//Zach
 };
