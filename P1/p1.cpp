@@ -25,9 +25,13 @@ void clear(){
 
 }
 
-void printIt(){
+const void printIt(){
 
 }
 
-bool readAt(int index){ // parker
+const int readAt(int index){ // parker
+}
+
+const int count() {
+
 }
