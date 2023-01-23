@@ -19,6 +19,6 @@ public:
     void clear();//Zach
     void printIt() const;//Zach
     int getIndex(string text) const;
-    int readAt(int index) const; //parker
+    int readAt(int index, string text) const; //parker
     int count() const;//Zach
 };

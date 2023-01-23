@@ -4,9 +4,8 @@ Author(s): Zachary Rea and Parker Ross
 Date: 22 January 2023
 Description: Program for creation and modification of stringList array
 */
-#include <iostream>
-#include <fstream>
-#include <string.h>
+#include <iostream>  //allows for usage of cin, cout, and cerr
+#include <string.h> //allows for usage of the string type in namespace std
 
 #include "p1.h"
 
@@ -15,24 +14,24 @@ using namespace std;
 //******************************************************************************
 
 stringList::stringList (int lSize) { //Zach
-    listCapacity = lSize;
-    a = new string[listCapacity];
-    listSize = 0;
+    listCapacity = lSize;  //set the capacity of the list to the passed in value 
+    a = new string[listCapacity];  //create a new string array of the given capacity
+    listSize = 0;  //set the current used space in the array to 0
 }
 
 stringList::~stringList () { //Zach
     delete[] a; //delete the array "a"
 }
 
-bool insert(string text){ // parker
+bool stringList::insert(string text){ // parker
 
 }
 
-bool add(string text){ // parker
+bool stringList::add(string text){ // parker
 
 }
 
-bool insertAt(int index, string text){ // parker
+bool stringList::insertAt(int index, string text){ // parker
 
 }
 
@@ -56,7 +55,7 @@ int stringList::getIndex(string text) const{
     return index;
 }
 
-bool readAt(int index){ // parker
+int stringList::readAt(int index, string text) const{ // parker
 
 }
 
