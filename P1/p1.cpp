@@ -13,8 +13,8 @@ using namespace std;
 
 //******************************************************************************
 
-stringList::stringList (int lSize) { //Zach
-    listCapacity = lSize;  //set the capacity of the list to the passed in value 
+stringList::stringList (int listCapacity) { //Zach
+    this->listCapacity = listCapacity;  //set the capacity of the list to the passed in value 
     a = new string[listCapacity];  //create a new string array of the given capacity
     listSize = 0;  //set the current used space in the array to 0
 }
@@ -73,8 +73,15 @@ for (int i = 0;i < listSize; i++) { //iterate through the array
 }
 
 int stringList::getIndex(string text) const{ //Zach
-    int index = 1;
-    return index;
+    int rc = -1; //set the default return to -1
+    int count = 0; //set a counter for the times the string is found
+    for (int i = 0;i < listSize - 1;i++) { //iterate through the array at least once
+        if (a[i] == text && count == 0) {
+            rc = i;
+            count++;
+        }
+    }
+    return rc;
 }
 
 int stringList::readAt(int index, string text) const{ // parker
