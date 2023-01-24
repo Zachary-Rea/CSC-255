@@ -23,18 +23,19 @@ stringList::~stringList () { //Zach
     delete[] a; //delete the array "a"
 }
 
-bool stringList::insert(string text) { // parker
+bool stringList::insert(string text) { // Parker
 bool rc = listCapacity > listSize; //Making sure we have room to move everything down to insert a new string
 if (rc) {  //if rc is true
     for (int i = listSize; i > 0; i--){//runs through the list, starting from the end
         a [i] = a[i-1];//moves each index over by one
     }
     a[0] = text;//inserts the new string at begining
+    listSize++;
 } 
 return rc;
 }
 
-bool stringList::add(string text) { // parker
+bool stringList::add(string text) { // Parker
 bool rc = listCapacity > listSize;// checking to make sure we have room at the end to add a new string
 if (rc) { // if rc is true 
     a [listSize] = text; // using list size to place the string at the end
@@ -43,22 +44,29 @@ if (rc) { // if rc is true
 return rc;
 }
 
-bool stringList::insertAt(int index, string text) { // parker
+bool stringList::insertAt(int index, string text) { // Parker
 bool rc = listCapacity > listSize && index < listSize && index >= 0; 
 //Making sure we have room to insert a new string and **zach's idea** making sure we have a valid index
 if (rc) {  //if rc is true
     for (int i = listSize; i > index; i--){//runs through the list starting from the end up to index
-        a [i] = a[i-1];//moves each index over by one
+        a [i] = a[i-1];//moves each index to the right
     }
     a[index] = text;//insert the new string at the begining
+    listSize++; //increasing list size to be accurate when string is added
 } 
 return rc;
 }
 
-bool stringList::deleteAt(int index, string &text) { //parker
-bool rc = listSize > index && index >= 0; // **Zach's idea** prevents user from touching anything outside of the list on either side when deleting a string
-
-    return rc; 
+bool stringList::deleteAt(int index, string &text) { //Parker
+bool rc = listSize > index && index >= 0; // **Zach's idea** prevents user from deleting anything outside of the list
+    if (rc){// if rc is true
+        text = a[index];// sets text to the value of the item deleted
+         for (int i = listSize; i > index; i--){ //runs through the list starting from the end up to index
+            a [i] = a[i+1]; //moves the each index to the left
+    }
+    listSize--; //decreasing list size to be accurate when string is removed
+}
+return rc;
 }
 
 void stringList::clear() { //Zach
@@ -84,12 +92,13 @@ int stringList::getIndex(string text) const{ //Zach
     return rc;
 }
 
-int stringList::readAt(int index, string text) const{ // parker
-int rc = -1;
-if (index < listSize && index >= 0) {
-
+int stringList::readAt(int index, string &text) const{ // Parker
+    int rc = -1; // if index is not true -1 will be the default value
+    if (index < listSize && index >= 0) { //**Zach's idea** making sure that the index is valid
+    rc = index; // setting rc to index if its true
+    text = a[index]; // sets text to the string at the given index
 }
-return rc;
+    return rc;
 }
 
 int stringList::count() const{ //Zach
