@@ -2,9 +2,10 @@
 #include <fstream>    // gets file functions of open and close
 #include <string.h>   // gets the string type, which is part of std namespace
 
+using namespace std;
+
 #include "p1.h"
 
-using namespace std;
 
 //******************************************************************************
 

@@ -4,6 +4,7 @@ Author(s): Zachary Rea and Parker Ross
 Date: 22 January 2023
 Description: The header file for p1
 */
+
 class stringList {
 private:
     string *a;

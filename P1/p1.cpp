@@ -7,9 +7,10 @@ Description: Program for creation and modification of stringList array
 #include <iostream>  //allows for usage of cin, cout, and cerr
 #include <string.h> //allows for usage of the string type in namespace std
 
+using namespace std;
+
 #include "p1.h"
 
-using namespace std;
 
 //******************************************************************************
 
@@ -61,8 +62,8 @@ bool stringList::deleteAt(int index, string &text) { //Parker
 bool rc = listSize > index && index >= 0; // **Zach's idea** prevents user from deleting anything outside of the list
     if (rc){// if rc is true
         text = a[index];// sets text to the value of the item deleted
-         for (int i = listSize; i > index; i--){ //runs through the list starting from the end up to index
-            a [i] = a[i+1]; //moves the each index to the left
+         for (int i = index; i < listSize; i++){ //runs through the list starting from the index
+            a[i] = a[i+1]; //moves the each index to the left
     }
     listSize--; //decreasing list size to be accurate when string is removed
 }
@@ -75,7 +76,7 @@ void stringList::clear() { //Zach
 
 void stringList::printIt() const{ //Zach
 for (int i = 0;i < listSize; i++) { //iterate through the array 
-    cout << "at pos " << i << " there is " << a[i] << "\n"; 
+    cout << "At pos " << i << " there is " << a[i] << "\n"; 
     //print out the index and contents of the array 
 }
 }
