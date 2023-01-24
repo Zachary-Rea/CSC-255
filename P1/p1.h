@@ -15,7 +15,7 @@ public:
     bool insert (string text); //parker
     bool add (string text); //parker 
     bool insertAt (int index,string text); //parker
-    bool deleteAt (int index,string text);
+    bool deleteAt (int index,string &text);
     void clear();//Zach
     void printIt() const;//Zach
     int getIndex(string text) const;

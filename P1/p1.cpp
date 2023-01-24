@@ -23,23 +23,45 @@ stringList::~stringList () { //Zach
     delete[] a; //delete the array "a"
 }
 
-bool stringList::insert(string text){ // parker
-
+bool stringList::insert(string text) { // parker
+bool rc = listCapacity > listSize; //Making sure we have room to move everything down to insert a new string
+if (rc) {  //if rc is true
+    for (int i = listSize; i > 0; i--){//runs through the list, starting from the end
+        a [i] = a[i-1];//moves each index over by one
+    }
+    a[0] = text;//inserts the new string at begining
+} 
+return rc;
 }
 
-bool stringList::add(string text){ // parker
-
+bool stringList::add(string text) { // parker
+bool rc = listCapacity > listSize;// checking to make sure we have room at the end to add a new string
+if (rc) { // if rc is true 
+    a [listSize] = text; // using list size to place the string at the end
+    listSize++; //increasing list size to be accurate when string is added
+}
+return rc;
 }
 
-bool stringList::insertAt(int index, string text){ // parker
-
+bool stringList::insertAt(int index, string text) { // parker
+bool rc = listCapacity > listSize && index < listSize && index >= 0; 
+//Making sure we have room to insert a new string and **zach's idea** making sure we have a valid index
+if (rc) {  //if rc is true
+    for (int i = listSize; i > index; i--){//runs through the list starting from the end up to index
+        a [i] = a[i-1];//moves each index over by one
+    }
+    a[index] = text;//insert the new string at the begining
+} 
+return rc;
 }
 
-bool stringList::deleteAt(int index, string text) {
-    return true;
+bool stringList::deleteAt(int index, string &text) { //parker
+bool rc = listSize > index && index >= 0; // **Zach's idea** prevents user from touching anything outside of the list on either side when deleting a string
+
+    return rc; 
 }
 
-void stringList::clear(){ //Zach
+void stringList::clear() { //Zach
     listSize = 0; //set variable size to 0
 }
 
@@ -50,13 +72,17 @@ for (int i = 0;i < listSize; i++) { //iterate through the array
 }
 }
 
-int stringList::getIndex(string text) const{
+int stringList::getIndex(string text) const{ //Zach
     int index = 1;
     return index;
 }
 
 int stringList::readAt(int index, string text) const{ // parker
+int rc = -1;
+if (index < listSize && index >= 0) {
 
+}
+return rc;
 }
 
 int stringList::count() const{ //Zach
