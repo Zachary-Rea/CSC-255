@@ -7,10 +7,9 @@ Description: Program for creation and modification of stringList array
 #include <iostream>  //allows for usage of cin, cout, and cerr
 #include <string.h> //allows for usage of the string type in namespace std
 
-using namespace std;
-
 #include "p1.h"
 
+using namespace std;
 
 //******************************************************************************
 
