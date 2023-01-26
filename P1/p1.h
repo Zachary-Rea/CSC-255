@@ -24,7 +24,7 @@ public:
     void clear();//Zach
     void printIt() const;//Zach
     int getIndex(std::string text) const;
-    int readAt(int index, std::string &text) const; //parker
+    bool readAt(int index, std::string &text) const; //parker
     int count() const;//Zach
 };
 
