@@ -12,7 +12,7 @@ readAt 1 got true and is
 add of Lord got true
 getIndex day got 3
 add of has got true
-readAt -1 got true and na
+readAt -1 got false and na
 add of made got true
 getIndex happy got -1
 insertAt 5,the got true
@@ -26,7 +26,7 @@ At pos 6 there is Lord
 At pos 7 there is has
 At pos 8 there is made
 insertAt 1,breakerbreaker got true
-readAt 30 got true and na
+readAt 30 got false and na
 insertAt 0,helperhelper got true
 At pos 0 there is helperhelper
 At pos 1 there is Today
