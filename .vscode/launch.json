@@ -2,14 +2,14 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "C/C++ Runner: Debug Session",
+      "name": "C/C++ Runner: Debug",
       "type": "cppdbg",
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
       "cwd": "c:/Users/Chill/Documents/GitHub/CSC-255",
-      "program": "c:/Users/Chill/Documents/GitHub/CSC-255/build/Debug/outDebug",
+      "program": "c:/Users/Chill/Documents/GitHub/CSC-255/P2/p2.exe",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

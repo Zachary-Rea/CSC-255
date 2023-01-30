@@ -19,16 +19,22 @@ stringLinkedList::stringLinkedList () {
     listCount = 0;
 }
 //******************************************************************************
+//Constructor
+node::node (string text, node *pn) {
+    this -> text = text;
+    this -> next = pn;
+}
+//******************************************************************************
 //Deconstructor
 stringLinkedList::~stringLinkedList () {
-    node *p;
-    node *f;
-    p = first;
-    f = p -> next;
+    node *p = first;
+    node *f = p -> next;
     while (listCount > 0) {
         delete p;
+        listCount--;
         p = f -> next;
         delete f;
+        listCount--;
         f = p -> next;
     }
 }
@@ -37,38 +43,41 @@ stringLinkedList::~stringLinkedList () {
 //******************************************************************************
 //Function for help with recursion 
 int stringLinkedList::getIndex (string text,node *pn, int index) const{
+    node *p = pn;
     string search;
     index = 0;
-    search = pn -> text;
-    pn = pn -> next;
+    search = p -> text;
+    p = p -> next;
     index++;
     while (!(search == text)) {
-        getIndex (text, pn, index);
+        getIndex (text, p, index);
     }
     return index;
 }
 //******************************************************************************
 //Function for help with recursion
 void stringLinkedList::printIt (node *pn, int index) const{
-    string text = pn->text;
+    node *p = pn;
+    string text = p->text;
     cout << "At pos " << index << " there is " << text << "\n";
     index++;
-    pn = pn -> next;
-    if (pn) {
-        printIt(pn, index);
+    p = p -> next;
+    if (p) {
+        printIt(p, index);
     }
 }
 //******************************************************************************
 //Function for help with recursion
 void stringLinkedList::clear (node *pn) {
-    node *f;
-    f = pn -> next;
-    delete pn;
-    pn = f -> next;
+    node *p = pn;
+    node *f = p -> next;
+    delete p;
+    listCount--;
+    p = f -> next;
     delete f;
     listCount--;
     while (listCount > 0) {
-        clear (pn);
+        clear (p);
     }
 }
 //******************************************************************************
@@ -103,15 +112,14 @@ bool stringLinkedList::add (string text) {
 //Function for inserting a string at a given position on the list
 bool stringLinkedList::insertAt (int index, string text) {
     bool rc;
-    node *f;
+    node *f = first;
     int ind;
-    f = first;
     ind = 0;
     while (f) {
         f = f -> next;
         ind++;
     }
-    if ((index > ind + 1) || (index < 0)) {
+    if ((index > ind) || (index < 0)) {
         rc = false;
     } else {
         if (index = 0) {
@@ -143,15 +151,14 @@ bool stringLinkedList::insertAt (int index, string text) {
 //Function for deleting a node at a given index 
 bool stringLinkedList::deleteAt (int index, string &text) {
     bool rc;
-    node *f;
+    node *f = first;
     int ind;
-    f = first;
     ind = 0;
     while (f) {
         f = f -> next;
         ind++;
     }
-    if ((index > ind + 1) || (!listCount) || (index < 0)) {
+    if ((index > ind) || (!listCount) || (index < 0)) {
         rc = false;
     } else {
         if (index = 0) {
@@ -167,8 +174,7 @@ bool stringLinkedList::deleteAt (int index, string &text) {
                 f = f -> next;
                 ind++;
             }
-            node *p;
-            p = first;
+            node *p = first;
             ind = 0;
             while (ind < index - 1) {
                 p = p -> next;
@@ -177,8 +183,7 @@ bool stringLinkedList::deleteAt (int index, string &text) {
             p -> next = f -> next;
         } else {
             f = last;
-            node *p;
-            p = first;
+            node *p = first;
             ind = 0;
             while (ind < index - 1) {
                 p = p -> next;
@@ -197,9 +202,8 @@ bool stringLinkedList::deleteAt (int index, string &text) {
 //Function for reading a string at a given index
 bool stringLinkedList::readAt (int index, string &text) {
     bool rc;
-    node *f;
+    node *f = first;
     int ind;
-    f = first;
     ind = 0;
     while (f) {
         f = f -> next;
@@ -232,9 +236,8 @@ void stringLinkedList::clear () {
 //******************************************************************************
 //Function for returning the index of a given string
 int stringLinkedList::getIndex (string text) const{
-    node *pn;
+    node *pn = first;
     int index;
-    pn = first;
     index = -1;
     getIndex (text, pn, index);
     return index;
@@ -249,3 +252,14 @@ void stringLinkedList::printIt () const{
 int stringLinkedList::count () const{
     return listCount;
 }
+
+/*
+Professor, we are aware that the program is currently seg faulting on every run, 
+but we have been unable to discover the reason that is causing it. I (Zachary)
+was going to come in to see you today to talk about it, but the snow day made that
+more difficult. I will be coming in to see you the next time that the school is open.
+I would have emailed you regarding this issue, but I am unsure of what question to 
+ask you regarding this. I have checked the program for writing over NULL pointers 
+and made sure that we are keeping track of the size of the object, but it continues 
+to fail.
+*/
