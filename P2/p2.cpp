@@ -21,7 +21,16 @@ stringLinkedList::stringLinkedList () {
 //******************************************************************************
 //Deconstructor
 stringLinkedList::~stringLinkedList () {
-
+    node *p;
+    node *f;
+    p = first;
+    f = p -> next;
+    while (listCount > 0) {
+        delete p;
+        p = f -> next;
+        delete f;
+        f = p -> next;
+    }
 }
 //******************************************************************************
 //Private functions
@@ -33,7 +42,13 @@ int stringLinkedList::getIndex (string text,node *pn, int index) const{
 //******************************************************************************
 //Function for help with recursion
 void stringLinkedList::printIt (node *pn, int index) const{
-
+    string text = pn->text;
+    cout << "At pos " << index << " there is " << text << "\n";
+    index++;
+    pn = pn -> next;
+    if (pn) {
+        printIt(pn, index);
+    }
 }
 //******************************************************************************
 //Function for help with recursion
@@ -146,6 +161,7 @@ bool stringLinkedList::deleteAt (int index, string &text) {
             p -> next = f -> next;
         } else {
             f = last;
+            node *p;
             p = first;
             ind = 0;
             while (ind < index - 1) {
@@ -164,7 +180,28 @@ bool stringLinkedList::deleteAt (int index, string &text) {
 //******************************************************************************
 //Function for reading a string at a given index
 bool stringLinkedList::readAt (int index, string &text) {
-
+    bool rc;
+    node *f;
+    int ind;
+    f = first;
+    ind = 0;
+    while (f) {
+        f = f -> next;
+        ind++;
+    }
+    if ((index > ind + 1) || (!listCount) || (index < 0)) {
+        rc = false;
+    } else {
+        f = first;
+        ind = 0;
+        while (index > ind) {
+            f = f -> next;
+            ind++;
+        }
+        text = f->text;
+        rc = true;
+    }
+    return rc;
 }
 //******************************************************************************
 //Function for removing all members of the list 
@@ -181,7 +218,7 @@ int stringLinkedList::getIndex (string text) const{
 //******************************************************************************
 //Function for printing the contents of the list 
 void stringLinkedList::printIt () const{
-
+    printIt(first,0);
 }
 //******************************************************************************
 //Function for returning the current size of the list 
