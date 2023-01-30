@@ -37,7 +37,15 @@ stringLinkedList::~stringLinkedList () {
 //******************************************************************************
 //Function for help with recursion 
 int stringLinkedList::getIndex (string text,node *pn, int index) const{
-
+    string search;
+    index = 0;
+    search = pn -> text;
+    pn = pn -> next;
+    index++;
+    while (!(search == text)) {
+        getIndex (text, pn, index);
+    }
+    return index;
 }
 //******************************************************************************
 //Function for help with recursion
@@ -224,7 +232,12 @@ void stringLinkedList::clear () {
 //******************************************************************************
 //Function for returning the index of a given string
 int stringLinkedList::getIndex (string text) const{
-
+    node *pn;
+    int index;
+    pn = first;
+    index = -1;
+    getIndex (text, pn, index);
+    return index;
 }
 //******************************************************************************
 //Function for printing the contents of the list 
