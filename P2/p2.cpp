@@ -53,7 +53,15 @@ void stringLinkedList::printIt (node *pn, int index) const{
 //******************************************************************************
 //Function for help with recursion
 void stringLinkedList::clear (node *pn) {
-
+    node *f;
+    f = pn -> next;
+    delete pn;
+    pn = f -> next;
+    delete f;
+    listCount--;
+    while (listCount > 0) {
+        clear (pn);
+    }
 }
 //******************************************************************************
 //Public functions
@@ -206,7 +214,10 @@ bool stringLinkedList::readAt (int index, string &text) {
 //******************************************************************************
 //Function for removing all members of the list 
 void stringLinkedList::clear () {
-
+    clear (first);
+    last = NULL;
+    first = NULL;
+    listCount = 0;
 }
 //******************************************************************************
 //Non-modifiers
