@@ -48,8 +48,10 @@ int stringLinkedList::getIndex(string text,node *pn, int &index) const{
     if (pn) {
         string search;
         search = pn->text;
+        //check if the string has been found
         if (search != text) {
             index++;
+            //recur with next in line
             getIndex(text,pn->next,index);
         }
     } else {
@@ -93,6 +95,7 @@ bool stringLinkedList::insert(string text) {
     node *p = new node(text,first);
     first = p;
     if (!listCount) {
+        //if there's nothing in the list set last to p as well
         last = p;
     }
     listCount++;
@@ -123,9 +126,11 @@ bool stringLinkedList::insertAt(int index, string text) {
     bool rc = false;
     if ((index <= listCount) && (index >= 0)) {
         node *f = first;
+        //if the first node in the list
         if (index == 0) {
             node *p = new node (text,first);
             first = p;
+            //if using on empty list
             if (!listCount) {
                 last = p;
             }
@@ -136,6 +141,7 @@ bool stringLinkedList::insertAt(int index, string text) {
                 f = f->next;
                 ind++;
             }
+            //create a second node for pointer handling
             node *p = new node(text,f->next);
             f->next = p;
         } else {
@@ -157,6 +163,7 @@ bool stringLinkedList::deleteAt(int index, string &text) {
     bool rc = false;
     if ((index >= 0) && (index < listCount) && (listCount)) {
         node *f;
+        //case for the first in the list
         if (index == 0) { 
             f = first;
             if (listCount == 1) {
@@ -164,6 +171,7 @@ bool stringLinkedList::deleteAt(int index, string &text) {
             } else {
                 first = f->next;
             }
+        //case for the main body of the list
         } else if (index < listCount - 1) {
             int ind;
             f = first;
@@ -179,6 +187,7 @@ bool stringLinkedList::deleteAt(int index, string &text) {
                 ind++;
             }
             p->next = f->next;
+        //case for the end of the list
         } else {
             int ind;
             f = last;
@@ -191,6 +200,7 @@ bool stringLinkedList::deleteAt(int index, string &text) {
             last = p;
             last->next = NULL;
         }
+        //return the string that was deleted
         text = f->text;
         delete f;
         listCount--;
@@ -210,10 +220,12 @@ bool stringLinkedList::readAt(int index, string &text) {
         int ind;
         ind = 0;
         f = first;
+        //walk through the list
         while (index > ind) {
             f = f->next;
             ind++;
         }
+        //set text to text of target node
         text = f->text;
         rc = true;
     }
@@ -238,7 +250,9 @@ void stringLinkedList::clear() {
 //Written by Zach
 
 int stringLinkedList::getIndex(string text) const{
+    //set up the value to be passed in
     int index = 0;
+    //call the private function
     getIndex (text, first, index);
     return index;
 }
