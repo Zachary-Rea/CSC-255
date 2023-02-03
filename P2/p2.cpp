@@ -34,16 +34,14 @@ stringLinkedList::~stringLinkedList() {
 //******************************************************************************
 //Function for help with recursion 
 int stringLinkedList::getIndex(string text,node *pn, int &index) const{
-    string search;
-    if ((listCount) && (index < listCount) - 1) {
+    if (pn) {
+        string search;
         search = pn->text;
         if (search != text) {
-            pn = pn->next;
             index++;
-            getIndex (text, pn, index);
+            getIndex(text,pn->next,index);
         }
-    }
-    if (index == listCount - 1) {
+    } else {
         index = -1;
     }
     return index;
@@ -51,27 +49,17 @@ int stringLinkedList::getIndex(string text,node *pn, int &index) const{
 //******************************************************************************
 //Function for help with recursion
 void stringLinkedList::printIt(node *pn, int index) const{
-    if ((listCount) && (index < listCount)) {
-        string text = pn->text;
-        cout << "At pos " << index << " there is " << text << "\n";
-        index++;
-        pn = pn->next;
-        if (pn) {
-            printIt(pn, index);
-        }
+    if (pn) {
+        cout << "At pos " << index << " there is " <<  pn->text << "\n";
+        printIt(pn->next,++index);
     }
 }
 //******************************************************************************
 //Function for help with recursion
 void stringLinkedList::clear(node *pn) {
-    if (listCount > 1) {
-        node *f = pn->next;
+    if (pn) {
+        clear (pn->next);
         delete pn;
-        listCount--;
-        clear (f);
-    } else if (listCount == 1) {
-        delete pn;
-        listCount--;
     }
 }
 //******************************************************************************
@@ -121,7 +109,7 @@ bool stringLinkedList::insertAt(int index, string text) {
                 f = f->next;
                 ind++;
             }
-            node *p = new node(text,p->next);
+            node *p = new node(text,f->next);
             f->next = p;
         } else {
             node *p = new node (text);
@@ -138,7 +126,7 @@ bool stringLinkedList::insertAt(int index, string text) {
 bool stringLinkedList::deleteAt(int index, string &text) {
     bool rc = false;
     if ((index >= 0) && (index < listCount) && (listCount)) {
-        node *f = first;
+        node *f;
         if (index == 0) { 
             f = first;
             if (listCount == 1) {
@@ -185,11 +173,10 @@ bool stringLinkedList::deleteAt(int index, string &text) {
 bool stringLinkedList::readAt(int index, string &text) {
     bool rc = false;
     if ((listCount) && (index < listCount) && (index > 0)) {
-        node *f = first;
+        node *f;
         int ind;
         ind = 0;
         f = first;
-        ind = 0;
         while (index > ind) {
             f = f->next;
             ind++;
@@ -212,7 +199,7 @@ void stringLinkedList::clear() {
 //******************************************************************************
 //Function for returning the index of a given string
 int stringLinkedList::getIndex(string text) const{
-    int index;
+    int index = 0;
     getIndex (text, first, index);
     return index;
 }
