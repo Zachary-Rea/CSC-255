@@ -64,7 +64,8 @@ int stringLinkedList::getIndex(string text,node *pn, int &index) const{
 
 void stringLinkedList::printIt(node *pn, int index) const{
     if (pn) {
-        cout << "At pos " << index << " there is " <<  pn->text << "\n";
+        string text = pn->text;
+        cout << "At pos " << index << " there is " <<  text << "\n";
         printIt(pn->next,++index);
     }
 }
