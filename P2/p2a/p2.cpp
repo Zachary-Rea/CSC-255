@@ -14,64 +14,70 @@ using namespace std;
 //Constructors and de-constructors
 //******************************************************************************
 //Constructor
-stringLinkedList::stringLinkedList() {
+stringLinkedList::stringLinkedList () {
     first = last = NULL;
     listCount = 0;
 }
 //******************************************************************************
 //Constructor
-node::node(string text, node *pn) {
-    this->text = text;
-    this->next = pn;
+node::node (string text, node *pn) {
+    this -> text = text;
+    this -> next = pn;
 }
 //******************************************************************************
 //Deconstructor
-stringLinkedList::~stringLinkedList() {
-    clear(first);
+stringLinkedList::~stringLinkedList () {
+    node *p = first;
+    node *f = p -> next;
+    while (listCount > 0) {
+        delete p;
+        listCount--;
+        p = f -> next;
+        delete f;
+        listCount--;
+        f = p -> next;
+    }
 }
 //******************************************************************************
 //Private functions
 //******************************************************************************
 //Function for help with recursion 
-int stringLinkedList::getIndex(string text,node *pn, int &index) const{
+int stringLinkedList::getIndex (string text,node *pn, int index) const{
+    node *p = pn;
     string search;
-    if ((listCount) && (index < listCount) - 1) {
-        search = pn->text;
-        if (search != text) {
-            pn = pn->next;
-            index++;
-            getIndex (text, pn, index);
-        }
-    }
-    if (index == listCount - 1) {
-        index = -1;
+    index = 0;
+    search = p -> text;
+    p = p -> next;
+    index++;
+    while (!(search == text)) {
+        getIndex (text, p, index);
     }
     return index;
 }
 //******************************************************************************
 //Function for help with recursion
-void stringLinkedList::printIt(node *pn, int index) const{
-    if ((listCount) && (index < listCount)) {
-        string text = pn->text;
-        cout << "At pos " << index << " there is " << text << "\n";
-        index++;
-        pn = pn->next;
-        if (pn) {
-            printIt(pn, index);
-        }
+void stringLinkedList::printIt (node *pn, int index) const{
+    node *p = pn;
+    string text = p->text;
+    cout << "At pos " << index << " there is " << text << "\n";
+    index++;
+    p = p -> next;
+    if (p) {
+        printIt(p, index);
     }
 }
 //******************************************************************************
 //Function for help with recursion
-void stringLinkedList::clear(node *pn) {
-    if (listCount > 1) {
-        node *f = pn->next;
-        delete pn;
-        listCount--;
-        clear (f);
-    } else if (listCount == 1) {
-        delete pn;
-        listCount--;
+void stringLinkedList::clear (node *pn) {
+    node *p = pn;
+    node *f = p -> next;
+    delete p;
+    listCount--;
+    p = f -> next;
+    delete f;
+    listCount--;
+    while (listCount > 0) {
+        clear (p);
     }
 }
 //******************************************************************************
@@ -80,7 +86,7 @@ void stringLinkedList::clear(node *pn) {
 //Modifiers
 //******************************************************************************
 //Function for inserting a string at the front of the list
-bool stringLinkedList::insert(string text) {
+bool stringLinkedList::insert (string text) {
     node *p = new node(text,first);
     first = p;
     if (!listCount) {
@@ -91,10 +97,10 @@ bool stringLinkedList::insert(string text) {
 }
 //******************************************************************************
 //Function for adding a string to last position of the list
-bool stringLinkedList::add(string text) {
+bool stringLinkedList::add (string text) {
     node *p = new node(text);
     if (last) {
-        last->next = p;
+        last -> next = p;
     } else {
         first = p;
     }
@@ -104,28 +110,36 @@ bool stringLinkedList::add(string text) {
 }
 //******************************************************************************
 //Function for inserting a string at a given position on the list
-bool stringLinkedList::insertAt(int index, string text) {
-    bool rc = false;
-    if ((index <= listCount) && (index >= 0)) {
-        node *f = first;
-        if (index == 0) {
+bool stringLinkedList::insertAt (int index, string text) {
+    bool rc;
+    node *f = first;
+    int ind;
+    ind = 0;
+    while (f) {
+        f = f -> next;
+        ind++;
+    }
+    if ((index > ind) || (index < 0)) {
+        rc = false;
+    } else {
+        if (index = 0) {
             node *p = new node (text,first);
             first = p;
             if (!listCount) {
                 last = p;
             }
-        } else if (index <= listCount) {
-            int ind;
+        } else if ((index > 0) && (index <= ind)) {
+            f = first;
             ind = 0;
             while (ind < index - 1) {
-                f = f->next;
+                f = f -> next;
                 ind++;
             }
-            node *p = new node(text,p->next);
-            f->next = p;
+            node *p = new node(text,p -> next);
+            f -> next = p;
         } else {
             node *p = new node (text);
-            last->next = p;
+            last -> next = p;
             last = p;
         }
         listCount++;
@@ -135,45 +149,49 @@ bool stringLinkedList::insertAt(int index, string text) {
 }
 //******************************************************************************
 //Function for deleting a node at a given index 
-bool stringLinkedList::deleteAt(int index, string &text) {
-    bool rc = false;
-    if ((index >= 0) && (index < listCount) && (listCount)) {
-        node *f = first;
-        if (index == 0) { 
+bool stringLinkedList::deleteAt (int index, string &text) {
+    bool rc;
+    node *f = first;
+    int ind;
+    ind = 0;
+    while (f) {
+        f = f -> next;
+        ind++;
+    }
+    if ((index > ind) || (!listCount) || (index < 0)) {
+        rc = false;
+    } else {
+        if (index = 0) {
             f = first;
-            if (listCount == 1) {
-                first = last = NULL;
-            } else {
-                first = f->next;
-            }
-        } else if (index < listCount - 1) {
-            int ind;
+            first = f -> next;
+        } else if (listCount = 1) {
+            f = first;
+            first = last = NULL;
+        } else if ((index > 0) && (index <= ind)) {
             f = first;
             ind = 0;
             while (ind < index) {
-                f = f->next;
+                f = f -> next;
                 ind++;
             }
             node *p = first;
             ind = 0;
             while (ind < index - 1) {
-                p = p->next;
+                p = p -> next;
                 ind++;
             }
-            p->next = f->next;
+            p -> next = f -> next;
         } else {
-            int ind;
             f = last;
             node *p = first;
             ind = 0;
             while (ind < index - 1) {
-                p = p->next;
+                p = p -> next;
                 ind++;
             }
             last = p;
-            last->next = NULL;
+            last -> next = NULL;
         }
-        text = f->text;
         delete f;
         listCount--;
         rc = true;
@@ -182,16 +200,22 @@ bool stringLinkedList::deleteAt(int index, string &text) {
 }
 //******************************************************************************
 //Function for reading a string at a given index
-bool stringLinkedList::readAt(int index, string &text) {
-    bool rc = false;
-    if ((listCount) && (index < listCount) && (index > 0)) {
-        node *f = first;
-        int ind;
-        ind = 0;
+bool stringLinkedList::readAt (int index, string &text) {
+    bool rc;
+    node *f = first;
+    int ind;
+    ind = 0;
+    while (f) {
+        f = f -> next;
+        ind++;
+    }
+    if ((index > ind + 1) || (!listCount) || (index < 0)) {
+        rc = false;
+    } else {
         f = first;
         ind = 0;
         while (index > ind) {
-            f = f->next;
+            f = f -> next;
             ind++;
         }
         text = f->text;
@@ -201,7 +225,7 @@ bool stringLinkedList::readAt(int index, string &text) {
 }
 //******************************************************************************
 //Function for removing all members of the list 
-void stringLinkedList::clear() {
+void stringLinkedList::clear () {
     clear (first);
     last = NULL;
     first = NULL;
@@ -211,18 +235,31 @@ void stringLinkedList::clear() {
 //Non-modifiers
 //******************************************************************************
 //Function for returning the index of a given string
-int stringLinkedList::getIndex(string text) const{
+int stringLinkedList::getIndex (string text) const{
+    node *pn = first;
     int index;
-    getIndex (text, first, index);
+    index = -1;
+    getIndex (text, pn, index);
     return index;
 }
 //******************************************************************************
 //Function for printing the contents of the list 
-void stringLinkedList::printIt() const{
+void stringLinkedList::printIt () const{
     printIt(first,0);
 }
 //******************************************************************************
 //Function for returning the current size of the list 
-int stringLinkedList::count() const{
+int stringLinkedList::count () const{
     return listCount;
 }
+
+/*
+Professor, we are aware that the program is currently seg faulting on every run, 
+but we have been unable to discover the reason that is causing it. I (Zachary)
+was going to come in to see you today to talk about it, but the snow day made that
+more difficult. I will be coming in to see you the next time that the school is open.
+I would have emailed you regarding this issue, but I am unsure of what question to 
+ask you regarding this. I have checked the program for writing over NULL pointers 
+and made sure that we are keeping track of the size of the object, but it continues 
+to fail.
+*/
