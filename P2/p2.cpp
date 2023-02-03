@@ -14,25 +14,36 @@ using namespace std;
 //Constructors and de-constructors
 //******************************************************************************
 //Constructor
+//Written by Zach
+
 stringLinkedList::stringLinkedList() {
     first = last = NULL;
     listCount = 0;
 }
+
 //******************************************************************************
 //Constructor
+//Written by Parker
+
 node::node(string text, node *pn) {
     this->text = text;
     this->next = pn;
 }
+
 //******************************************************************************
 //Deconstructor
+//Written by Zach
+
 stringLinkedList::~stringLinkedList() {
     clear(first);
 }
+
 //******************************************************************************
 //Private functions
 //******************************************************************************
 //Function for help with recursion 
+//Written by Zach
+
 int stringLinkedList::getIndex(string text,node *pn, int &index) const{
     if (pn) {
         string search;
@@ -46,28 +57,37 @@ int stringLinkedList::getIndex(string text,node *pn, int &index) const{
     }
     return index;
 }
+
 //******************************************************************************
 //Function for help with recursion
+//Written by Parker
+
 void stringLinkedList::printIt(node *pn, int index) const{
     if (pn) {
         cout << "At pos " << index << " there is " <<  pn->text << "\n";
         printIt(pn->next,++index);
     }
 }
+
 //******************************************************************************
 //Function for help with recursion
+//Written by Parker
+
 void stringLinkedList::clear(node *pn) {
     if (pn) {
         clear (pn->next);
         delete pn;
     }
 }
+
 //******************************************************************************
 //Public functions
 //******************************************************************************
 //Modifiers
 //******************************************************************************
 //Function for inserting a string at the front of the list
+//Written by Zach
+
 bool stringLinkedList::insert(string text) {
     node *p = new node(text,first);
     first = p;
@@ -77,8 +97,11 @@ bool stringLinkedList::insert(string text) {
     listCount++;
     return true;
 }
+
 //******************************************************************************
 //Function for adding a string to last position of the list
+//Written by Parker
+
 bool stringLinkedList::add(string text) {
     node *p = new node(text);
     if (last) {
@@ -90,8 +113,11 @@ bool stringLinkedList::add(string text) {
     listCount++;
     return true;
 }
+
 //******************************************************************************
 //Function for inserting a string at a given position on the list
+//Written by Zach
+
 bool stringLinkedList::insertAt(int index, string text) {
     bool rc = false;
     if ((index <= listCount) && (index >= 0)) {
@@ -121,8 +147,11 @@ bool stringLinkedList::insertAt(int index, string text) {
     }
     return rc;
 }
+
 //******************************************************************************
 //Function for deleting a node at a given index 
+//Written by Zach
+
 bool stringLinkedList::deleteAt(int index, string &text) {
     bool rc = false;
     if ((index >= 0) && (index < listCount) && (listCount)) {
@@ -168,8 +197,11 @@ bool stringLinkedList::deleteAt(int index, string &text) {
     }
     return rc;
 }
+
 //******************************************************************************
 //Function for reading a string at a given index
+//Written by Zach
+
 bool stringLinkedList::readAt(int index, string &text) {
     bool rc = false;
     if ((listCount) && (index < listCount) && (index > 0)) {
@@ -186,30 +218,42 @@ bool stringLinkedList::readAt(int index, string &text) {
     }
     return rc;
 }
+
 //******************************************************************************
 //Function for removing all members of the list 
+// Written by Parker
+
 void stringLinkedList::clear() {
     clear (first);
     last = NULL;
     first = NULL;
     listCount = 0;
 }
+
 //******************************************************************************
 //Non-modifiers
 //******************************************************************************
 //Function for returning the index of a given string
+//Written by Zach
+
 int stringLinkedList::getIndex(string text) const{
     int index = 0;
     getIndex (text, first, index);
     return index;
 }
+
 //******************************************************************************
 //Function for printing the contents of the list 
+//Written by Parker
+
 void stringLinkedList::printIt() const{
     printIt(first,0);
 }
+
 //******************************************************************************
 //Function for returning the current size of the list 
+// Writen by Parker
+
 int stringLinkedList::count() const{
     return listCount;
 }
