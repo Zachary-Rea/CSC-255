@@ -128,14 +128,21 @@ bool cStringList::deleteAt(int index, string &text) {
 }
 
 //******************************************************************************
-
-
+//Function for reading the value at given index
+//written by Parker
 
 bool cStringList::readAt(int index, string &text) {
-    bool rc = false;
+    bool rc = false; 
+    int read = first;
+    int temp = last;
+    int i = 0;
+    while (i != temp){
+    if (index < listCapacity && index > 0){
+        text = a[index];
+        }
+    }
     return rc;
 }
-
 
 //******************************************************************************
 //Function for deleting the first entry
