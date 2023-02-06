@@ -37,27 +37,24 @@ cStringList::~cStringList() {
 //Function for decrementing passed value
 //Written by Parker
 
-void decVal(int &value){
-    dec(ind){
-        ind = ind -1;
-        if(ind < 0){
-            ind = cap -1;
-        }
+void cStringList::decVal(int &value){
+    if (value > 0) {
+        value = value - 1;
+    } else {
+        value = listCapacity - 1;
     }
 }
 
+//******************************************************************************
 //Function for Incrementing passed value
 //Written by Parker
-void incVal(int &value){
-    dec(ind){
-        ind = ind +1;
-        if(ind < 0){
-            ind = ind % cap; // = 0 ??
+void cStringList::incVal(int &value){
+    if (value < listCapacity) {
+        value = value + 1;
+    } else {
+        value = 0;
     }
 }
-
-   
-
 
 //******************************************************************************
 //Public functions
@@ -68,11 +65,12 @@ void incVal(int &value){
 bool cStringList::insert(string text) {
     bool rc = false;
     if (listCount < listCapacity) {
-        decVal(first);
-        a[first] = text;
         if (listCount == 0) {
             last = first;
+        } else {
+            decVal(first);
         }
+        a[first] = text;
         listCount++;
         rc = true;
     }
@@ -98,3 +96,92 @@ bool cStringList::add(string text) {
 }
 
 //******************************************************************************
+
+
+
+bool cStringList::insertAt(int index, string text) {
+    bool rc = false;
+    return rc;
+}
+
+//******************************************************************************
+
+
+
+bool cStringList::deleteAt(int index, string &text) {
+    bool rc = false;
+    return rc;
+}
+
+//******************************************************************************
+
+
+
+bool cStringList::readAt(int index, string &text) {
+    bool rc = false;
+    return rc;
+}
+
+//******************************************************************************
+
+
+
+bool cStringList::deleteFirst(string &text) {
+    bool rc = false;
+    if (listCount > 0) {
+        text = a[first];
+        incVal(first);
+        listCount--;
+        rc = true;
+    }
+    return rc;
+}
+
+//******************************************************************************
+
+
+
+bool cStringList::deleteLast(string &text) {
+    bool rc = false;
+    if (listCount > 0) {
+        text = a[last];
+        decVal(last);
+        listCount--;
+        rc = true;
+    }
+    return rc;
+}
+
+//******************************************************************************
+
+
+
+void cStringList::clear() {
+    listCount = 0;
+    first = last = 0;
+}
+
+//******************************************************************************
+
+
+
+int cStringList::count() const{
+    return listCount;
+}
+
+//******************************************************************************
+
+
+
+int cStringList::getIndex(string text) {
+    int rc = 0;
+    return rc;
+}
+
+//******************************************************************************
+
+
+
+void cStringList::printIt() const{
+
+}
