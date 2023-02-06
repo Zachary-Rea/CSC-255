@@ -104,23 +104,19 @@ bool cStringList::insertAt(int index, string text) {
     bool rc = false;
     if ((index < listCount) && (listCount < listCapacity) && (index >= 0)) {
         incVal(last);
+        int temp = last;
         if (index == 0) {
             decVal(first);
-            for (int i = last;i != first;) {
-                int temp = i;
-                decVal(temp);
-                a[i] = a[temp];
-                decVal(i);
-            }
+            a[first] = text;
         } else {
-            for (int i = last;i >= index;) {
-                int temp = i;
+            for (int i = listCount; i > index; i--) {
+                int move = temp;
+                decVal (move);
+                a[temp] = a[move];
                 decVal(temp);
-                a[i] = a[temp];
-                decVal(i);
             }
+            a[index] = text;
         }
-        a[index] = text;
         listCount++;
         rc = true;
     }
