@@ -15,7 +15,7 @@ class cStringList {
         int listCapacity;
         int listCount;
         int first;
-        int last;\
+        int last;
         void incVal(int &value);
         void decVal(int &value);
     public:
