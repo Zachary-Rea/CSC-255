@@ -105,18 +105,13 @@ bool cStringList::insertAt(int index, string text) {
     if ((index < listCount) && (listCount < listCapacity) && (index >= 0)) {
         incVal(last);
         int temp = last;
-        if (index == 0) {
-            decVal(first);
-            a[first] = text;
-        } else {
             for (int i = listCount; i > index; i--) {
                 int move = temp;
                 decVal (move);
                 a[temp] = a[move];
                 decVal(temp);
             }
-            a[index] = text;
-        }
+        a[index] = text;
         listCount++;
         rc = true;
     }
@@ -130,13 +125,15 @@ bool cStringList::insertAt(int index, string text) {
 bool cStringList::deleteAt(int index, string &text) {
     bool rc = false;
     if ((index >= 0) && (index < listCount) && (listCount > 0)) {
-        text = a[index];
-        int ind = index;
-        while (ind != last) {
-            int move = ind;
-            incVal(move);
-            a[ind] = a[move];
-            incVal(ind);
+        int i = first;
+        while (i <= index) {
+            incVal(i);
+        }
+        text = a[i];
+        while (i != last) {
+            int temp = i;
+            incVal(i);
+            a[temp] = a[i];
         }
         decVal(last);
         listCount--;
