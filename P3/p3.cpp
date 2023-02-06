@@ -155,14 +155,15 @@ bool cStringList::deleteAt(int index, string &text) {
 
 bool cStringList::readAt(int index, string &text) {
     bool rc = false; 
-    int read = first;
-    int temp = last;
-    incVal(temp);
-    int i = 0;
-    while (read != temp){
-    if (index < listCapacity && index > 0){
-        text = a[index];
+    if ((index >= 0) && (index < listCount)) {
+        int read = first;
+        int i = 0;
+        while (i < index) {
+            i++;
+            incVal(read);
         }
+        text = a[read];
+        rc = true;
     }
     return rc;
 }
