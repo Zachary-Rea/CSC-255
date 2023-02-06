@@ -1,8 +1,8 @@
 /*
 Filename: p3.cpp
 Author(s): Zachary Rea and Parker Ross
-Date: 27 January 2023
-Description: 
+Date: 5 February 2023
+Description: The cpp for circular lists
 */
 #include <iostream>  //allows for usage of cin, cout, and cerr
 
@@ -49,6 +49,7 @@ void cStringList::decVal(int &value){
 //******************************************************************************
 //Function for Incrementing passed value
 //Written by Parker
+
 void cStringList::incVal(int &value){
     if (value < listCapacity) {
         value = value + 1;
@@ -65,10 +66,12 @@ void cStringList::incVal(int &value){
 
 bool cStringList::insert(string text) {
     bool rc = false;
+    //Ensure there is space
     if (listCount < listCapacity) {
         if (listCount == 0) {
             last = first;
         } else {
+            //move the first place
             decVal(first);
         }
         a[first] = text;
@@ -85,6 +88,7 @@ bool cStringList::insert(string text) {
 bool cStringList::add(string text) {
     bool rc = false;
     if (listCount < listCapacity) {
+        //move the last place 
         incVal(last);
         a[last] = text;
         if (listCount == 0) {
@@ -102,15 +106,18 @@ bool cStringList::add(string text) {
 
 bool cStringList::insertAt(int index, string text) {
     bool rc = false;
+    //Check for valid index
     if ((index < listCount) && (listCount < listCapacity) && (index >= 0)) {
         incVal(last);
         int temp = last;
-            for (int i = listCount; i > index; i--) {
-                int move = temp;
-                decVal (move);
-                a[temp] = a[move];
-                decVal(temp);
-            }
+        //walk through the list
+        for (int i = listCount; i > index; i--) {
+            int move = temp;
+            decVal (move);
+            //copy the contents of the list down
+            a[temp] = a[move];
+            decVal(temp);
+        }
         a[index] = text;
         listCount++;
         rc = true;
@@ -119,17 +126,21 @@ bool cStringList::insertAt(int index, string text) {
 }
 
 //******************************************************************************
-
-
+//Funtion for deleting the contents of a given index 
+//Written by Zach
 
 bool cStringList::deleteAt(int index, string &text) {
     bool rc = false;
+    //check for valid index
     if ((index >= 0) && (index < listCount) && (listCount > 0)) {
         int i = first;
+        //walk through the list
         while (i <= index) {
             incVal(i);
         }
+        //set the text to the string that is being deleted
         text = a[i];
+        //overwrite the rest of the contents
         while (i != last) {
             int temp = i;
             incVal(i);
@@ -168,7 +179,9 @@ bool cStringList::readAt(int index, string &text) {
 bool cStringList::deleteFirst(string &text) {
     bool rc = false;
     if (listCount > 0) {
+        //copy the text that is being removed
         text = a[first];
+        //move the first indicator 
         incVal(first);
         listCount--;
         rc = true;
@@ -183,7 +196,9 @@ bool cStringList::deleteFirst(string &text) {
 bool cStringList::deleteLast(string &text) {
     bool rc = false;
     if (listCount > 0) {
+        //copy the text that is being deleted
         text = a[last];
+        //move the last indicator
         decVal(last);
         listCount--;
         rc = true;
@@ -194,6 +209,7 @@ bool cStringList::deleteLast(string &text) {
 //******************************************************************************
 //Fucntion for clearing list
 //written by Parker
+
 void cStringList::clear() {
     listCount = 0;
     first = last = 0;
@@ -202,6 +218,7 @@ void cStringList::clear() {
 //******************************************************************************
 //function for returning size of list
 //written by Parker
+
 int cStringList::count() const{
     return listCount;
 }
@@ -213,9 +230,11 @@ int cStringList::count() const{
 int cStringList::getIndex(string text) {
     int rc = -1;
     int i = first;
+    //search for the text in a loop til last
     while ((a[i] != text) && (i != last)) {
         incVal(i);
     }
+    //if found, record the index it was found 
     if (a[i] == text) {
         rc = i;
     }
@@ -225,6 +244,7 @@ int cStringList::getIndex(string text) {
 //******************************************************************************
 //Function for printing values in circular list
 //Written by Parker
+
 void cStringList::printIt() {
     if (listCount) {
         int print = first;
@@ -238,3 +258,12 @@ void cStringList::printIt() {
         }  
     }
 }
+
+/*Professor, in the assignment, you list that printIt is intended to be 
+a const function, but I did not understand a way of writing that such 
+that it would not need to involve the incVal function. Given the fact 
+that we can't simply walk through the list. As this was not a part of 
+p3a, I wrote it like this for now, and will be following up with you 
+tomorrow. This just serves to acknowledge that it is different from the 
+assignment page. 
+*/

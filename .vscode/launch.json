@@ -19,6 +19,25 @@
           "ignoreFailures": true
         }
       ]
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "c:/Users/Chill/OneDrive/Documents/GitHub/CSC-255/P3",
+      "program": "c:/Users/Chill/OneDrive/Documents/GitHub/CSC-255/P3/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
     }
   ]
 }
