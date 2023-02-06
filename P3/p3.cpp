@@ -102,17 +102,26 @@ bool cStringList::add(string text) {
 
 bool cStringList::insertAt(int index, string text) {
     bool rc = false;
-    if ((index < listCount) && (listCount < listCapacity) && (index > 0)) {
-        int move = last;
-        int temp = index;
-        decVal(temp);
-        while (move != temp) {
-            int ind = move;
-            decVal(ind);
-            a[move] = a[ind];
-            decVal(move);
+    if ((index < listCount) && (listCount < listCapacity) && (index >= 0)) {
+        incVal(last);
+        if (index == 0) {
+            decVal(first);
+            for (int i = last;i != first;) {
+                int temp = i;
+                decVal(temp);
+                a[i] = a[temp];
+                decVal(i);
+            }
+        } else {
+            for (int i = last;i >= index;) {
+                int temp = i;
+                decVal(temp);
+                a[i] = a[temp];
+                decVal(i);
+            }
         }
         a[index] = text;
+        listCount++;
         rc = true;
     }
     return rc;
@@ -124,6 +133,19 @@ bool cStringList::insertAt(int index, string text) {
 
 bool cStringList::deleteAt(int index, string &text) {
     bool rc = false;
+    if ((index >= 0) && (index < listCount) && (listCount > 0)) {
+        text = a[index];
+        int ind = index;
+        while (ind != last) {
+            int move = ind;
+            incVal(move);
+            a[ind] = a[move];
+            incVal(ind);
+        }
+        decVal(last);
+        listCount--;
+        rc = true;
+    }
     return rc;
 }
 
@@ -202,12 +224,15 @@ int cStringList::getIndex(string text) {
 //Function for printing values in circular list
 //Written by Parker
 void cStringList::printIt() {
-    int print = first;
-    int i = 0;
-    int temp = last;
-    incVal(temp);
-    while (i != temp){
-        cout << "At pos " << i << " there is " << a[i] << "\n"; 
-        incVal(i);
-    }  
+    if (listCount) {
+        int print = first;
+        int temp = last;
+        incVal(temp);
+        int i = 0;
+        while (print != temp){
+            cout << "At pos " << i << " there is " << a[print] << "\n"; 
+            incVal(print);
+            i++;
+        }  
+    }
 }
