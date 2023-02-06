@@ -157,8 +157,9 @@ bool cStringList::readAt(int index, string &text) {
     bool rc = false; 
     int read = first;
     int temp = last;
+    incVal(temp);
     int i = 0;
-    while (i != temp){
+    while (read != temp){
     if (index < listCapacity && index > 0){
         text = a[index];
         }
@@ -235,7 +236,7 @@ void cStringList::printIt() {
         int print = first;
         int temp = last;
         incVal(temp);
-        int i = 0;
+        int i = 0;  
         while (print != temp){
             cout << "At pos " << i << " there is " << a[print] << "\n"; 
             incVal(print);
