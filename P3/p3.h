@@ -31,6 +31,6 @@ class cStringList {
         void clear();
         int count() const;
         int getIndex(std::string text);
-        void printIt() const;
+        void printIt();
 };
 #endif

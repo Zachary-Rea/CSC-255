@@ -136,6 +136,7 @@ bool cStringList::readAt(int index, string &text) {
     return rc;
 }
 
+
 //******************************************************************************
 //Function for deleting the first entry
 //Written by Zach
@@ -167,18 +168,16 @@ bool cStringList::deleteLast(string &text) {
 }
 
 //******************************************************************************
-
-
-
+//Fucntion for clearing list
+//written by Parker
 void cStringList::clear() {
     listCount = 0;
     first = last = 0;
 }
 
 //******************************************************************************
-
-
-
+//function for returning size of list
+//written by Parker
 int cStringList::count() const{
     return listCount;
 }
@@ -200,9 +199,15 @@ int cStringList::getIndex(string text) {
 }
 
 //******************************************************************************
-
-
-
-void cStringList::printIt() const{
-
+//Function for printing values in circular list
+//Written by Parker
+void cStringList::printIt() {
+    int print = first;
+    int i = 0;
+    int temp = last;
+    incVal(temp);
+    while (i != temp){
+        cout << "At pos " << i << " there is " << a[i] << "\n"; 
+        incVal(i);
+    }  
 }
