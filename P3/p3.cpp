@@ -16,12 +16,25 @@ using namespace std;
 //Function for decrementing passed value
 //Written by Parker
 
-      decVal(first);
-      a[first] = text;
-      if (listCount == 0){
-	last = first;
+void decVal(int &value){
+    dec(ind){
+        ind = ind -1;
+        if(ind < 0){
+            ind = cap -1;
+        }
+    }
 }
-	return listCount++;
+
+//Function for Incrementing passed value
+//Written by Parker
+void incVal(int &value){
+    dec(ind){
+        ind = ind +1;
+        if(ind < 0){
+            ind = ind % cap; // = 0 ??
+    }
+}
+
    
 
 
