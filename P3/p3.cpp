@@ -39,6 +39,7 @@ cStringList::~cStringList() {
 //Written by Parker
 
 void cStringList::decVal(int &value){
+    //prevents decVal from going beyond list capacity
     if (value > 0) {
         value = value - 1;
     } else {
@@ -51,6 +52,7 @@ void cStringList::decVal(int &value){
 //Written by Parker
 
 void cStringList::incVal(int &value){
+    //prevents incVal from going beyond list capacity
     if (value < listCapacity) {
         value = value + 1;
     } else {
@@ -159,9 +161,11 @@ bool cStringList::deleteAt(int index, string &text) {
 
 bool cStringList::readAt(int index, string &text) {
     bool rc = false; 
+    //checking for index within the list
     if ((index >= 0) && (index < listCount)) {
         int read = first;
         int i = 0;
+        //shifts entries to the left of index
         while (i < index) {
             i++;
             incVal(read);
@@ -211,6 +215,7 @@ bool cStringList::deleteLast(string &text) {
 //written by Parker
 
 void cStringList::clear() {
+    //empties list
     listCount = 0;
     first = last = 0;
 }
@@ -220,6 +225,7 @@ void cStringList::clear() {
 //written by Parker
 
 int cStringList::count() const{
+    //returns number of list entries
     return listCount;
 }
 
@@ -259,8 +265,8 @@ void cStringList::printIt() {
     }
 }
 
-/*Professor, in the assignment, you list that printIt is intended to be 
-a const function, but I did not understand a way of writing that such 
+/*Professor, in the assignment, you listed that the printIt is intended 
+to be a const function, but I dont understand a way of writing that such 
 that it would not need to involve the incVal function. Given the fact 
 that we can't simply walk through the list. As this was not a part of 
 p3a, I wrote it like this for now, and will be following up with you 
