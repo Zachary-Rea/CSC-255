@@ -15,8 +15,8 @@ add of has got true
 readAt -1 got false and na
 add of made got true
 getIndex happy got 0
-insertAt 5,the got false
-insertAt 1,breakerbreaker got false
+insertAt 5,the got true
+insertAt 1,breakerbreaker got true
 add of amen got true
 readAt 30 got false and na
 insertAt 0,helperhelper got false

@@ -26,6 +26,7 @@ cStringList::cStringList(int capacity) {
 
 //******************************************************************************
 //De-constructor
+//Written by Zach
 
 cStringList::~cStringList() {
     delete [] a;
@@ -96,11 +97,24 @@ bool cStringList::add(string text) {
 }
 
 //******************************************************************************
-
-
+//Function for inserting a string at the given index 
+//Written by Zach
 
 bool cStringList::insertAt(int index, string text) {
     bool rc = false;
+    if ((index < listCount) && (listCount < listCapacity) && (index > 0)) {
+        int move = last;
+        int temp = index;
+        decVal(temp);
+        while (move != temp) {
+            int ind = move;
+            decVal(ind);
+            a[move] = a[ind];
+            decVal(move);
+        }
+        a[index] = text;
+        rc = true;
+    }
     return rc;
 }
 
@@ -123,8 +137,8 @@ bool cStringList::readAt(int index, string &text) {
 }
 
 //******************************************************************************
-
-
+//Function for deleting the first entry
+//Written by Zach
 
 bool cStringList::deleteFirst(string &text) {
     bool rc = false;
@@ -138,8 +152,8 @@ bool cStringList::deleteFirst(string &text) {
 }
 
 //******************************************************************************
-
-
+//Function for deleting the last entry 
+//Written by Zach
 
 bool cStringList::deleteLast(string &text) {
     bool rc = false;
@@ -170,11 +184,18 @@ int cStringList::count() const{
 }
 
 //******************************************************************************
-
-
+//Function for returning the index of the given string
+//Written by Zach
 
 int cStringList::getIndex(string text) {
-    int rc = 0;
+    int rc = -1;
+    int i = first;
+    while ((a[i] != text) && (i != last)) {
+        incVal(i);
+    }
+    if (a[i] == text) {
+        rc = i;
+    }
     return rc;
 }
 
