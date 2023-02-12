@@ -59,14 +59,16 @@ string sBST::findMin(sNode *ptr) {
 
 //******************************************************************************
 //Function for help with recursion
-//Stubbed
+//Written by Zach
 
 bool sBST::insert(sNode *p, string text) {
     bool rc = false;
     if (treeCount == 0) {
         sNode *t = new sNode(text);
         root = t;
+        treeCount++;
         rc = true;
+        
     } else {
         int check = text.compare(p->text);
         if (check > 0) {
@@ -156,7 +158,7 @@ void sBST::clear(sNode *p) {
 //Public Functions
 //******************************************************************************
 //Function to insert the text into the tree 
-//Stubbed
+//Written by Zach
 
 bool sBST::insert(string text) {
     bool rc = false;
