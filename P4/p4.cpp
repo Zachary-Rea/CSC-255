@@ -131,15 +131,24 @@ bool sBST::remove(sNode *p, string text) {
 //Stubbed
 
 bool sBST::isIn() {
+    if (p == NULL){
+
+    }
     return false;
+
 }
 
 //******************************************************************************
 //Function for help with recursion
-//Stubbed
+//Written by Parker
 
 void sBST::printIt(sNode *p) const{
-
+  if (p != NULL){ //making sure function has a printable node 
+    // prints left subtree, root then right subtree for ascending order
+    printIt(p->left); //prints Left subtree
+    cout << p->text << endl; //print root
+    printIt(p->right); //prints right subtree
+    }
 }
 
 //******************************************************************************
