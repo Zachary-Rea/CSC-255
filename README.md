@@ -1,2 +1,2 @@
 # CSC-255
- A repo for Parker and Zach's data structures class
+ A repo for Zach and Parker's data structures class
