@@ -59,16 +59,19 @@ while (ptr->left){ //while a smaller value exists
 
 bool sBST::insert(sNode *p, string text) {
     bool rc = false;
-    if (p){
-        if (text > p->text){
-        rc = insert (p->right, text);
-        } else if (text < p->text){
-            rc = insert (p->left, text);
-        } else {
-            p = new sNode (text);
-            treeCount++;
-            rc = true;
+    if (p) {
+        if (text > p->text) {
+            rc = insert(p->right, text);
+        } else if (text < p->text) {
+            rc = insert(p->left, text);
         }
+    } else {
+        p = new sNode (text);
+        if (treeCount == 0) {
+            root = p;
+        }
+        treeCount++;
+        rc = true;
     }
     return rc;
 }
@@ -85,11 +88,11 @@ bool sBST::remove(sNode *p, string text) {
                 p->text = findMin(p->right);
                 rc = remove(p->right,p->text);
             } else if (p->left) {   
-           sNode *t = p;                
-                    p = p->left;                            
-                    delete t;      
-                    treeCount--;
-                    rc = true; 
+                sNode *t = p;                
+                p = p->left;                            
+                delete t;      
+                treeCount--;
+                rc = true; 
             }
             else{
                 delete p;
@@ -108,30 +111,29 @@ bool sBST::remove(sNode *p, string text) {
 //Function for help with recursion
 //Written by Parker
 bool sBST::isIn(sNode *p, string text) const {
- bool rc = false;
- if (p){
-        if (text < p->text){
-        isIn(p->left,text);
-        }
-    else if (text > p->text){
-        rc = isIn (p-> right,text);
+    bool rc = false;
+    if (p){
+        if (text < p->text) {
+            isIn(p->left,text);
+        } else if (text > p->text) {
+            rc = isIn (p-> right,text);
         } else {
         rc = true;
         }
     }
     return rc;
- }
+}
 
 //******************************************************************************
 //Function for help with recursion
 //Written by Parker
 
 void sBST::printIt(sNode *p) const{
-  if (p != NULL){ //making sure function has a printable node 
+    if (p){ //making sure function has a printable node 
     // prints left subtree, root then right subtree for ascending order
-    printIt(p->left); //prints Left subtree
-    cout << p->text << endl; //print root
-    printIt(p->right); //prints right subtree
+        printIt(p->left); //prints Left subtree
+        cout << p->text << endl; //print root
+        printIt(p->right); //prints right subtree
     }
 }
 
@@ -178,7 +180,7 @@ return (isIn(root,text));
 //Written by Parker
 
 void sBST::printIt() const{
-printIt(root);
+    printIt(root);
 }
 
 //******************************************************************************
