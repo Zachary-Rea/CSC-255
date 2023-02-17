@@ -46,11 +46,13 @@ sBST::~sBST() {
 //Written by Parker
 
 string sBST::findMin(sNode *ptr) {
-string rc = ptr->text; // storing text in rc
-while (ptr->left){ //while a smaller value exists
-    ptr = ptr->left;
+    string rc; // storing text in rc
+    if (ptr->left) {
+        rc = findMin(ptr->left);
+    } else {
+        rc = ptr->text;
     }
-    return ptr->text;//returns the node with the minimum value
+    return rc;//returns the node with the minimum value
 }
 
 //******************************************************************************
@@ -67,9 +69,6 @@ bool sBST::insert(sNode *&p, string text) {
         }
     } else {
         p = new sNode (text);
-        if (treeCount == 0) {
-            root = p;
-        }
         treeCount++;
         rc = true;
     }
@@ -93,10 +92,10 @@ bool sBST::remove(sNode *&p, string text) {
                 delete t;
                 treeCount--;
                 rc = true;
-            }
-            else{
+            } else {
                 delete p;
                 treeCount--;
+                rc = true;
             }
         } else if (text < p->text) {
             rc = remove(p->left,text);
@@ -114,7 +113,7 @@ bool sBST::isIn(sNode *p, string text) const {
     bool rc = false;
     if (p){
         if (text < p->text) {
-            isIn(p->left,text);
+            rc = isIn(p->left,text);
         } else if (text > p->text) {
             rc = isIn (p-> right,text);
         } else {
@@ -164,7 +163,7 @@ bool sBST::insert(string text) {
 //Written by Zach edited by Parker
 
 bool sBST::remove(string text) {
-    return (remove(root,text));
+    return (remove(root, text));
 }
 
 //******************************************************************************
@@ -172,7 +171,7 @@ bool sBST::remove(string text) {
 //Written by Parker
 
 bool sBST::isIn(string text) const {
-return (isIn(root,text));
+return (isIn(root, text));
 }
 
 //******************************************************************************
