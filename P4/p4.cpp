@@ -198,3 +198,8 @@ void sBST::clear() { //calls Clear function
     treeCount = 0; //clears tree count
     root = NULL; //sets root to empty
 }
+
+//Dr. Wheat, I understand that our code is seg faulting when the program
+//attempts to use the remove function. After implementing your p4a 
+//corrections and stubbing out findMin, we couldnt come to a 
+//conclusion on how it is occuring. 
