@@ -151,8 +151,7 @@ void sBST::clear(sNode *p) {
 //Written by Zach
 
 bool sBST::insert(string text) {
-    bool rc = insert(root, text);
-    return rc;
+    return insert(root, text);
 }
 
 //******************************************************************************
@@ -160,7 +159,7 @@ bool sBST::insert(string text) {
 //Written by Zach edited by Parker
 
 bool sBST::remove(string text) {
-    return remove(root,text);
+    return (remove(root,text));
 }
 
 //******************************************************************************
@@ -168,7 +167,7 @@ bool sBST::remove(string text) {
 //Written by Parker
 
 bool sBST::isIn(sNode *p, string text) const {
-  return isIn;
+  return isIn(root,text);
 }
 
 //******************************************************************************
