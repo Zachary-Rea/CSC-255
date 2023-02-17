@@ -50,7 +50,7 @@ class sBST {
         //Function to remove the node with the given text
         bool remove(std::string text);
         //Function to tell if the tree contains the text
-        bool isIn(sNode *p, std::string text) const;
+        bool isIn(std::string text) const;
         //Function to print the BST values in ascending order
         void printIt() const;
         //Function to show the number of nodes in the tree

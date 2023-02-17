@@ -85,12 +85,15 @@ bool sBST::remove(sNode *p, string text) {
                 p->text = findMin(p->right);
                 rc = remove(p->right,p->text);
             } else if (p->left) {   
-           sNode *t = p;
-                    t = p;                  
-                    p = p->left;          
-                    rc = true;                         
-                    delete t;           
+           sNode *t = p;                
+                    p = p->left;                            
+                    delete t;      
                     treeCount--;
+                    rc = true; 
+            }
+            else{
+                delete p;
+                treeCount--;
             }
         } else if (text < p->text) {
             rc = remove(p->left,text);
@@ -116,6 +119,7 @@ bool sBST::isIn(sNode *p, string text) const {
         rc = true;
         }
     }
+    return rc;
  }
 
 //******************************************************************************
@@ -165,7 +169,7 @@ bool sBST::remove(string text) {
 //Function to tell if the tree co`ntains the given text
 //Written by Parker
 
-bool sBST::isIn(sNode *p, string text) const {
+bool sBST::isIn(string text) const {
 return (isIn(root,text));
 }
 
