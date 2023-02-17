@@ -47,9 +47,9 @@ sBST::~sBST() {
 
 string sBST::findMin(sNode *ptr) {
     string rc; // storing text in rc
-    if (ptr->left) { //continues left until there is no min value
-        rc = findMin(ptr->left);
-    } else { //stops at minimum value
+    if (ptr->right) {
+        rc = findMin(ptr->right);
+    } else {
         rc = ptr->text;
     }
     return rc;//returns the node with the minimum value
@@ -60,14 +60,15 @@ string sBST::findMin(sNode *ptr) {
 //Written by Zach edited by Parker
 
 bool sBST::insert(sNode *&p, string text) {
-    bool rc = false; 
-    if (p) { //if tree exists
-        if (text > p->text) { //inserts text to the right default if greater            rc = insert(p->right, text);
-        } else if (text < p->text) { //else text goes left when lesser
+    bool rc = false;
+    if (p) {
+        if (text > p->text) {
+            rc = insert(p->right, text);
+        } else if (text < p->text) {
             rc = insert(p->left, text);
         }
     } else {
-        p = new sNode (text); //if no tree exists, creates a new one
+        p = new sNode (text);
         treeCount++;
         rc = true;
     }
@@ -110,10 +111,10 @@ bool sBST::remove(sNode *&p, string text) {
 //Written by Parker
 bool sBST::isIn(sNode *p, string text) const {
     bool rc = false;
-    if (p){ 
-        if (text < p->text) { //goes left if text is less than node value
+    if (p){
+        if (text < p->text) {
             rc = isIn(p->left,text);
-        } else if (text > p->text) { //goes right if text is greater than node value
+        } else if (text > p->text) {
             rc = isIn (p-> right,text);
         } else {
         rc = true;
@@ -140,10 +141,10 @@ void sBST::printIt(sNode *p) const{
 //Written by Zach
 
 void sBST::clear(sNode *p) {
-    if (p) { // if a node exists
-        clear(p->left); //recursively clears left subtree
-        clear(p->right); //recursively clears right subtree
-        delete p;  //deletes node
+    if (p) {
+        clear(p->left);
+        clear(p->right);
+        delete p;
     }
 }
 
@@ -161,7 +162,7 @@ bool sBST::insert(string text) {
 //Function to remove the node with the given text
 //Written by Zach edited by Parker
 
-bool sBST::remove(string text) { //calls remove function
+bool sBST::remove(string text) {
     return (remove(root, text));
 }
 
@@ -169,7 +170,7 @@ bool sBST::remove(string text) { //calls remove function
 //Function to tell if the tree co`ntains the given text
 //Written by Parker
 
-bool sBST::isIn(string text) const { //calls isIn function
+bool sBST::isIn(string text) const {
 return (isIn(root, text));
 }
 
@@ -177,7 +178,7 @@ return (isIn(root, text));
 //Function to print the BST values in ascending order
 //Written by Parker
 
-void sBST::printIt() const{ //calls printIt function
+void sBST::printIt() const{
     printIt(root);
 }
 
@@ -185,7 +186,7 @@ void sBST::printIt() const{ //calls printIt function
 //Function to show the number of nodes in the tree
 //Written by Zach
 
-int sBST::count() const{ //calls Count function
+int sBST::count() const{
     return treeCount;
 }
 
@@ -193,13 +194,12 @@ int sBST::count() const{ //calls Count function
 //Function to remove all of the nodes in the tree
 //Written by Zach
 
-void sBST::clear() { //calls Clear function
+void sBST::clear() {
     clear(root);
-    treeCount = 0; //clears tree count
-    root = NULL; //sets root to empty
+    treeCount = 0;
+    root = NULL;
 }
 
-//Dr. Wheat, I understand that our code is seg faulting when the program
-//attempts to use the remove function. After implementing your p4a 
-//corrections and stubbing out findMin, we couldnt come to a 
-//conclusion on how it is occuring. 
+//Dr. Wheat, I understand that our code is seg faulting when the program 
+//attempts to remove a node. Even after stubbing findMin, we were unable
+//to find the cause of the problem when we implemented the p4a corrections.
