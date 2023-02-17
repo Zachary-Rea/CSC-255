@@ -47,8 +47,8 @@ sBST::~sBST() {
 
 string sBST::findMin(sNode *ptr) {
     string rc; // storing text in rc
-    if (ptr->left) {
-        rc = findMin(ptr->left);
+    if (ptr->right) {
+        rc = findMin(ptr->right);
     } else {
         rc = ptr->text;
     }
@@ -199,3 +199,7 @@ void sBST::clear() {
     treeCount = 0;
     root = NULL;
 }
+
+//Dr. Wheat, I understand that our code is seg faulting when the program 
+//attempts to remove a node. Even after stubbing findMin, we were unable
+//to find the cause of the problem when we implemented the p4a corrections.
