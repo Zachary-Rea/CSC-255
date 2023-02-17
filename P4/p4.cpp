@@ -14,12 +14,12 @@ using namespace std;
 //Constructors and De-constructors
 //******************************************************************************
 //Constructor
-//Written by Zach
+//Written by Zach edited by Parker
 
 sNode::sNode(string text) {
     this->text = text;
     left = right = NULL;
-    this->h = 0;
+    h = 0;
 }
 
 //******************************************************************************
@@ -43,55 +43,31 @@ sBST::~sBST() {
 //Private Functions
 //******************************************************************************
 //Function to find the minimum value of the subtree
-//Written by Zach
+//Written by Parker
 
 string sBST::findMin(sNode *ptr) {
-    string rc;
-    if (ptr->left) {
-        findMin(ptr->left);
-    } else if (ptr->right) {
-        findMin(ptr->right);
-    } else {
-        rc = ptr->text;
-    }
-    return rc;
+    string rc = ptr->text; // storing text in rc
+  while (ptr->left){ //while a smaller value exists
+    ptr = ptr->left;
+  }
+  return ptr->text;//returns the node with the minimum value
 }
 
 //******************************************************************************
 //Function for help with recursion
-//Written by Zach
+//Written by Zach edited by Parker
 
 bool sBST::insert(sNode *p, string text) {
     bool rc = false;
-    //Empty tree base case
-    if (treeCount == 0) {
-        sNode *t = new sNode(text);
-        root = t;
-        treeCount++;
-        rc = true;
-    } else {
-        //Compare the inserting string with the string of the node
-        int check = text.compare(p->text);
-        //Go to the right child
-        if (check > 0) {
-            if (p->right) {
-                rc = insert(p->right,text);
-            } else {
-                sNode *t = new sNode(text);
-                p->right = t;
-                treeCount++;
-                rc = true;
-            }
-        } else if (check < 0) {
-            //Go to the left child
-            if (p->left) {
-                rc = insert(p->left,text);
-            } else {
-                sNode *t = new sNode(text);
-                p->left = t;
-                treeCount++;
-                rc = true;
-            }
+    if (p){
+        if (text > p->text){
+        rc = insert (p->right, text);
+        } else if (text < p->text){
+            rc = insert (p->left, text);
+        } else {
+            p = new sNode (text);
+            treeCount++;
+            rc = true;
         }
     }
     return rc;
@@ -99,44 +75,49 @@ bool sBST::insert(sNode *p, string text) {
 
 //******************************************************************************
 //Function for help with recursion
-//Written by Zach but stubbed for p4a
+//Written by Zach edited by Parker
 
 bool sBST::remove(sNode *p, string text) {
     bool rc = false;
-    /*
+
     if (p) {
         if (text == p->text) {
             if (p->right) {
                 p->text = findMin(p->right);
                 rc = remove(p->right,p->text);
-            } else if (p->left) {
-                p->text = p->left->text;
-                p->right = p->left->right;
-                p->left = p->left->left;
-                delete p->left;
-                treeCount--;
-            } else {
-                delete p;
-                treeCount--;
+            } else if (p->left) {   
+           sNode *t = p;
+                    t = p;                  
+                    p = p->left;          
+                    rc = true;                         
+                    delete t;           
+                    treeCount--;
             }
-            rc = true;
-        } else if ((text < p->text) && (p->left)) {
+        } else if (text < p->text) {
             rc = remove(p->left,text);
-        } else if ((text > p->text) && (p->right)) {
+        } else if (text > p->text) {
             rc = remove(p->right,text);
         }
     }
-    */
     return rc;
 }
 
 //******************************************************************************
 //Function for help with recursion
 //Written by Parker
-
-bool sBST::isIn() {
-    return false;
-}
+bool sBST::isIn(sNode *p, string text) const {
+ bool rc = false;
+ if (p){
+    if (text < p->text){
+        isIn(p->left,text);
+    }
+    else if (text > p->text){
+        rc = isIn (p-> right,text);
+        } else {
+        rc = true;
+        }
+    }
+ }
 
 //******************************************************************************
 //Function for help with recursion
@@ -176,22 +157,18 @@ bool sBST::insert(string text) {
 
 //******************************************************************************
 //Function to remove the node with the given text
-//Written by Zach
+//Written by Zach edited by Parker
 
 bool sBST::remove(string text) {
-    bool rc = false;
-    if (treeCount) {
-        rc = remove(root,text);
-    }
-    return rc;
+    return remove(root,text);
 }
 
 //******************************************************************************
-//Function to tell if the tree contains the given text
+//Function to tell if the tree co`ntains the given text
 //Written by Parker
 
-bool sBST::isIn(string text) {
-    return false;
+bool sBST::isIn(sNode *p, string text) const {
+  return isIn;
 }
 
 //******************************************************************************
@@ -199,9 +176,7 @@ bool sBST::isIn(string text) {
 //Written by Parker
 
 void sBST::printIt() const{
-    if (treeCount) {
         printIt(root);
-    }
 }
 
 //******************************************************************************
