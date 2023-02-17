@@ -57,7 +57,7 @@ while (ptr->left){ //while a smaller value exists
 //Function for help with recursion
 //Written by Zach edited by Parker
 
-bool sBST::insert(sNode *p, string text) {
+bool sBST::insert(sNode *&p, string text) {
     bool rc = false;
     if (p) {
         if (text > p->text) {
@@ -80,19 +80,19 @@ bool sBST::insert(sNode *p, string text) {
 //Function for help with recursion
 //Written by Zach edited by Parker
 
-bool sBST::remove(sNode *p, string text) {
+bool sBST::remove(sNode *&p, string text) {
     bool rc = false;
     if (p) {
         if (text == p->text) {
             if (p->right) {
                 p->text = findMin(p->right);
                 rc = remove(p->right,p->text);
-            } else if (p->left) {   
-                sNode *t = p;                
-                p = p->left;                            
-                delete t;      
+            } else if (p->left) {
+                sNode *t = p;
+                p = p->left;
+                delete t;
                 treeCount--;
-                rc = true; 
+                rc = true;
             }
             else{
                 delete p;

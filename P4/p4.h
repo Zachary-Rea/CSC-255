@@ -31,9 +31,9 @@ class sBST {
         //Function to find the minimum value of the subtree
         std::string findMin(sNode *ptr);
         //Function for help with recursion
-        bool insert(sNode *p, std::string text);
+        bool insert(sNode *&p, std::string text);
         //Function for help with recursion
-        bool remove(sNode *p, std::string text);
+        bool remove(sNode *&p, std::string text);
         //Function for help with recursion
         bool isIn(sNode *p, std::string text) const;
         //Function for help with recursion
