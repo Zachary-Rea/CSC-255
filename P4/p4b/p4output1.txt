@@ -1,0 +1,19 @@
+Do Work - START ********************
+Inserting text from: p4In_1.txt
+Text not inserted:  abc
+Tree count is 13
+Tree contents are: 
+123
+456
+789
+abc
+def
+ghi
+hello
+jkl
+mno
+pqr
+stu
+vwx
+yz0
+Removing text from: p4Remove_1.txt
