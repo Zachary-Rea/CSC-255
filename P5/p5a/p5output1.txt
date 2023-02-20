@@ -1,0 +1,19 @@
+Do Work - START ********************
+Inserting text from: p5In_1.txt
+Text not inserted:  abc
+Tree count is 13
+Tree contents are: 
+At 8 the string is 123: height = 1
+At 9 the string is 456: height = 1
+At 10 the string is 789: height = 1
+At 14 the string is abc: height = 1
+At 15 the string is def: height = 1
+At 16 the string is ghi: height = 1
+At 20 the string is hello: height = 1
+At 21 the string is jkl: height = 1
+At 22 the string is mno: height = 1
+At 23 the string is pqr: height = 1
+At 24 the string is stu: height = 1
+At 25 the string is vwx: height = 1
+At 26 the string is yz0: height = 1
+Removing text from: p5Remove_1.txt
