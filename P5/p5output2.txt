@@ -51,3 +51,7 @@ isIn reports this is in the list: walked
 isIn reports this is in the list: trusted
 isIn reports this is in the list: obey
 isIn reports this is NOT in the list: tyranny
+
+The cleared tree status:  count = 0
+The cleared tree contents follow:
+Do Work - END   ********************

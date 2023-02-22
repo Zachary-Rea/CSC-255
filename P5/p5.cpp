@@ -36,16 +36,16 @@ sAVL::sAVL() {
 //Written by Zach
 
 sAVL::~sAVL() {
-    clear();
+    clear(root);
 }
 
 //******************************************************************************
 //Private Functions
 //******************************************************************************
 //Function to find the minimum value of the subtree
-//Written by Parker
+//Written by Zach edited by Parker
 
-string sAVL::findMin(sNode *ptr) {
+string sAVL::findMin(sNode *ptr) const {
     string rc; 
     if (ptr->left) {
         //look for left child
@@ -53,7 +53,7 @@ string sAVL::findMin(sNode *ptr) {
     } else {
         rc = ptr->text;
     }
-    return rc; //returns the minimum node text
+    return rc;
 }
 
 //******************************************************************************
@@ -86,7 +86,7 @@ bool sAVL::remove(sNode *&p, string text) {
     if (p) {
         //case for the correct node
         if (text == p->text) {
-            //recursively find the min of right child and replace
+            //recursively finds the min right child and replace
             if (p->right) {
                 p->text = findMin(p->right);
                 rc = remove(p->right,p->text);
@@ -97,12 +97,7 @@ bool sAVL::remove(sNode *&p, string text) {
                 delete t;
                 treeCount--;
                 rc = true;
-                //no children just delete
-            } else {
-                delete p;
-                treeCount--;
-                rc = true;
-            }
+            } 
             //recursion for children
         } else if (text < p->text) {
             rc = remove(p->left,text);
@@ -136,12 +131,12 @@ bool sAVL::isIn(sNode *p, string text) const {
 //Written by Parker
 
 void sAVL::printIt(sNode *p, int &index) const{
-    if (p){ //making sure function has a printable node 
+    if (p){
     // prints left subtree, root then right subtree for ascending order
-        printIt(p->left,index); //prints Left subtree
+        printIt(p->left,index); 
         cout << "At " << index << " the string is " <<p->text << ": height = "
         << p->h << endl;
-        printIt(p->right,index); //prints right subtree
+        printIt(p->right,index);
     }
     index++;
 }
@@ -176,13 +171,13 @@ void sAVL::rotateLeft(sNode *&p1) {
 //Written by Zach
 
 void sAVL::rotateRight(sNode *&p1) {
-    /*
+    
     sNode *p2 = p1->left;
     p1->left = p2->right;
     p2->right = p1;
     p1->h = calcHeight(p1);
     p2->h = calcHeight(p2);
-    p1 = p2;*/
+    p1 = p2;
 }
 
 //******************************************************************************
@@ -190,11 +185,11 @@ void sAVL::rotateRight(sNode *&p1) {
 //Written by Zach
 
 void sAVL::bal(sNode *&p) {
-    /*
+    
     if (p) {
         int diff = height(p->left) - height(p->right);
         if (diff == 2) {
-            diff = height(p->left->left) - height(p->right->right);
+            diff = height(p->left->left) - height(p->left->right);
             if (diff < 0) {
                 rotateLeft(p->left);
             }
@@ -206,7 +201,7 @@ void sAVL::bal(sNode *&p) {
             rotateLeft(p);
         }
         p->h = calcHeight(p);
-    }*/
+    }
 }
 
 //******************************************************************************
@@ -252,7 +247,7 @@ bool sAVL::remove(string text) {
 //Written by Parker
 
 bool sAVL::isIn(string text) const {
-return (isIn(root, text));
+    return (isIn(root, text));
 }
 
 //******************************************************************************
@@ -299,11 +294,3 @@ int max(int a, int b) {
     }
     return rc;
 }
-
-/*
-Professor,
-we are aware that the program still hitting the same exact seg fault with 
-remove, but we were still unable to solve this. We will be implementing the 
-changes that we receive on our p4b submission when we get that back tomorrow,
-and shoule be able to make the necessary changes after that.
-*/

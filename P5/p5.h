@@ -29,7 +29,7 @@ class sAVL {
         //Points to the top of the tree of nodes
         sNode *root;
         //Function to find the minimum value of the subtree
-        std::string findMin(sNode *ptr);
+        std::string findMin(sNode *ptr) const;
         //Function for help with recursion
         bool insert(sNode *&p, std::string text);
         //Function for help with recursion
