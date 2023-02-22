@@ -79,14 +79,14 @@ bool sAVL::insert(sNode *&p, string text) {
 
 //******************************************************************************
 //Function for help with recursion
-//Written by Zach
-
+//Written by Zach edited by Parker
+ 
 bool sAVL::remove(sNode *&p, string text) {
     bool rc = false;
     if (p) {
         //case for the correct node
         if (text == p->text) {
-            //recursively finds the min right child and replace
+            //replaces min of right child
             if (p->right) {
                 p->text = findMin(p->right);
                 rc = remove(p->right,p->text);
@@ -97,7 +97,12 @@ bool sAVL::remove(sNode *&p, string text) {
                 delete t;
                 treeCount--;
                 rc = true;
-            } 
+            } else {
+                delete p;
+                treeCount--;
+                rc =true;
+                p = NULL;
+            }
             //recursion for children
         } else if (text < p->text) {
             rc = remove(p->left,text);
