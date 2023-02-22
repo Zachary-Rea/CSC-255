@@ -136,9 +136,9 @@ void sAVL::printIt(sNode *p, int &index) const{
         printIt(p->left,index); 
         cout << "At " << index << " the string is " <<p->text << ": height = "
         << p->h << endl;
+        index++;
         printIt(p->right,index);
     }
-    index++;
 }
 
 //******************************************************************************
@@ -255,7 +255,7 @@ bool sAVL::isIn(string text) const {
 //Written by Parker
 
 void sAVL::printIt() const{
-    int index;
+    int index = 0;
     printIt(root,index);
 }
 

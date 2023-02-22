@@ -3,19 +3,19 @@ Inserting text from: p5In_1.txt
 Text not inserted:  abc
 Tree count is 13
 Tree contents are: 
-At 8 the string is 123: height = 1
-At 10 the string is 456: height = 2
-At 11 the string is 789: height = 1
-At 14 the string is abc: height = 3
-At 15 the string is def: height = 2
-At 16 the string is ghi: height = 1
-At 20 the string is hello: height = 4
-At 21 the string is jkl: height = 1
-At 23 the string is mno: height = 2
-At 24 the string is pqr: height = 1
-At 27 the string is stu: height = 3
-At 28 the string is vwx: height = 2
-At 29 the string is yz0: height = 1
+At 0 the string is 123: height = 1
+At 1 the string is 456: height = 2
+At 2 the string is 789: height = 1
+At 3 the string is abc: height = 3
+At 4 the string is def: height = 2
+At 5 the string is ghi: height = 1
+At 6 the string is hello: height = 4
+At 7 the string is jkl: height = 1
+At 8 the string is mno: height = 2
+At 9 the string is pqr: height = 1
+At 10 the string is stu: height = 3
+At 11 the string is vwx: height = 2
+At 12 the string is yz0: height = 1
 Removing text from: p5Remove_1.txt
 abc was NOT removed
 ghi was NOT removed
@@ -25,19 +25,19 @@ world was NOT removed
 Delete Count is 0
 Tree count is 13
 Tree contents are: 
-At 8 the string is 123: height = 1
-At 10 the string is 456: height = 2
-At 11 the string is 789: height = 1
-At 14 the string is def: height = 3
-At 15 the string is ghi: height = 2
-At 16 the string is ghi: height = 1
-At 20 the string is hello: height = 4
-At 21 the string is jkl: height = 1
-At 23 the string is mno: height = 2
-At 24 the string is pqr: height = 1
-At 27 the string is stu: height = 3
-At 28 the string is vwx: height = 2
-At 29 the string is yz0: height = 1
+At 0 the string is 123: height = 1
+At 1 the string is 456: height = 2
+At 2 the string is 789: height = 1
+At 3 the string is def: height = 3
+At 4 the string is ghi: height = 2
+At 5 the string is ghi: height = 1
+At 6 the string is hello: height = 4
+At 7 the string is jkl: height = 1
+At 8 the string is mno: height = 2
+At 9 the string is pqr: height = 1
+At 10 the string is stu: height = 3
+At 11 the string is vwx: height = 2
+At 12 the string is yz0: height = 1
 
 Checing for text from: p5IsIn_1.txt
 isIn reports this is in the list: def
