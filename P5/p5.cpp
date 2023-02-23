@@ -225,7 +225,7 @@ int sAVL::height(sNode *p) const{
 //Function to calculate the height of a node based on children 
 //Written by Zach
 
-int sAVL::calcHeight(sNode *p) {
+int sAVL::calcHeight(sNode *p)const {
     return (max(height(p->left),height(p->right)) + 1);
 }
 

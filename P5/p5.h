@@ -49,7 +49,7 @@ class sAVL {
         //Function to return the height of a node 
         int height(sNode *p) const;
         //Function to calculate the height of a node based on children
-        int calcHeight(sNode *p);
+        int calcHeight(sNode *p) const;
     public:
         //Constructor
         sAVL();
