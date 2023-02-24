@@ -1,0 +1,6 @@
+Do WorkBST - START   ********************
+Tree(0) took 1421.11 ms to insert.
+Tree(0) took 1416.97 ms to do isIn().
+Tree(1) took 50.659 ms to insert.
+Tree(1) took 58383.1 ms to do isIn().
+Do Work - END   ********************
