@@ -111,7 +111,7 @@ void iPQ::bubbleUp(int index) {
 //Written by Zach
 
 void iPQ::heapify(int index) {
-    if (index) {
+    if (index >= 0) {
         int larger = index;
         int l = left(index);
         if (l < qCount) {
