@@ -87,9 +87,9 @@ void iPQ::printIt(int ind, int count) const{
 //Written by Zach
 
 void iPQ::swap(int x, int y) {
-int temp = values[x];
+values[qCount] = values[x];
 values[x] = values[y];
-values[y] = temp;
+values[y] = values[qCount];
 }
 
 //******************************************************************************
@@ -114,7 +114,7 @@ void iPQ::heapify(int index) {
     if (index) {
         int larger = index;
         int l = left(index);
-        if (l >= qCount) {
+        if (l < qCount) {
             //check if left is larger
             if (values[l] > values[larger]) {
                 larger = l;
@@ -146,7 +146,7 @@ bool iPQ::enq(int v) {
     if(qCount < qCapacity){
         values[qCount] = v;
         qCount++;
-        bubbleUp(qCount);
+        bubbleUp(qCount - 1);
         rc = true;
     }
     return rc;
