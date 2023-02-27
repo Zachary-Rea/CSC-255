@@ -97,10 +97,10 @@ void iPQ::swap(int x, int y) {
 //written by Parker
 
 void iPQ::bubbleUp(int index) {
-    if (index){
+    if (index) {
         int par = parent(index);
-        if(values[index] > values[par]){
-            swap(values[index],values[par]);
+        if(values[index] > values[par]) {
+            swap(index,par);
             bubbleUp(par);
         }
     }
@@ -115,18 +115,21 @@ void iPQ::heapify(int index) {
         int larger = index;
         int l = left(index);
         if (l < qCount) {
+            //check if left is larger
             if (values[l] > values[larger]) {
                 larger = l;
             }
             int r = right(index);
             if (r < qCount) {
+                //check if right is larger
                 if (values[r] > values[larger]) {
                     larger = r;
                 }
             }
         }
+        //swap if needed
         if (index != larger) {
-            swap(values[index],values[larger]);
+            swap(index,larger);
             heapify(larger);
         }
     }
@@ -142,8 +145,8 @@ bool iPQ::enq(int v) {
     bool rc = false;
     if(qCount < qCapacity){
         values[qCount] = v;
-        bubbleUp (qCount);
         qCount++;
+        bubbleUp(qCount);
         rc = true;
     }
     return rc;
