@@ -16,7 +16,7 @@ using namespace std;
 //Constructor
 //Written by Parker
 iPQ::iPQ(int n){
-
+treeCount=0;
 
 }
 
@@ -24,15 +24,41 @@ iPQ::iPQ(int n){
 //de-constructor
 //Written by Parker
 
-    void iPQ::clear() {
-        tc = 0;
+    void clear() {
+        int n = 0;
     }
 
 //******************************************************************************
 //Private Members
+//Swap
 //******************************************************************************
 
+void swap (int *x, int *y){
 
+}
+
+//******************************************************************************
+//Bubble Up
+//******************************************************************************
+//written by Parker
+
+void bubbleUp (int index){
+    if (index){
+        int par = parent(index);
+        if(a[index] < a [par]){
+            swap(a[index],a[par])
+            bubbleUp (par);
+        }
+    }
+}
+ 
+//******************************************************************************
+//heapify
+//******************************************************************************
+
+void heapify (int index){
+
+}
 
 //******************************************************************************
 //Public Members
@@ -40,10 +66,11 @@ iPQ::iPQ(int n){
 //Enques value into iPQ; returns true for success; false if full
 //Written by Parker
 
-bool iPQ::enq(text){
-    if(tc < tCap){
+bool enq(text){
+    bool rc = false;
+    if(treeCount < treeCap){
         a[tc] = text;
-        bubble up (tc);
+        bubbleUp (tc);
         tC++;
         rc = true;
     }
@@ -56,7 +83,7 @@ bool iPQ::enq(text){
 //returns true if IPQ is not empty; removes & returns max value, false if empty
 //Written by Parker
 
-bool iPQ::deq(String & text){
+bool deq(String & text){
     bool rc = tc > 0;
     if (rc){
         text = a [0];
@@ -70,6 +97,6 @@ bool iPQ::deq(String & text){
 //******************************************************************************
 //clear
 //******************************************************************************
-//removes all entries from the iPQ
-//Written by Parker
+
+
 
