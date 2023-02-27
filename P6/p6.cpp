@@ -57,7 +57,7 @@ int iPQ::left(int index) const{
 //Written by Zach
 
 int iPQ::right(int index) const{
-    return (left(index)+1);
+    return (2*index)+2;
 }
 //******************************************************************************
 //function to print tree by level
@@ -87,9 +87,9 @@ void iPQ::printIt(int ind, int count) const{
 //Written by Zach
 
 void iPQ::swap(int x, int y) {
-    values[qCount] = values[x];
-    values[x] = values[y];
-    values[y] = values[qCount];
+int temp = values[x];
+values[x] = values[y];
+values[y] = temp;
 }
 
 //******************************************************************************
@@ -114,7 +114,7 @@ void iPQ::heapify(int index) {
     if (index) {
         int larger = index;
         int l = left(index);
-        if (l < qCount) {
+        if (l >= qCount) {
             //check if left is larger
             if (values[l] > values[larger]) {
                 larger = l;

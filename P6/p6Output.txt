@@ -20,18 +20,18 @@ Level[6]-> 749 620 256 932 572 613 490 509 119 405 695 49 327 719 497 824 596 64
 Tree count is now 0
 Tree count is 10
 Tree contents are: 
-Level[0]-> 0 
+Level[0]-> 933 
 Level[1]-> 933 743 
-Level[2]-> 262 529 700 508 
+Level[2]-> 752 529 700 508 
 Level[3]-> 752 256 256 
-0: deq got 0
+0: deq got 933
 1: deq got 256
 2: deq got 256
 3: deq got 752
 4: deq got 508
 5: deq got 700
 6: deq got 529
-7: deq got 262
+7: deq got 752
 8: deq got 743
 9: deq got 933
 all done 
