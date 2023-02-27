@@ -66,18 +66,19 @@ int iPQ::right(int index) const{
 void iPQ::printIt(int ind, int count) const{
     int start, stop;
     count = 1 << ind;
-    start = count -1;
+    start = count - 1;
     stop = start + count;
     if(start < qCount){
         if(stop > qCount){
             stop = qCount;
         }
-        cout << "Level[" << ind << "]->";
+        cout << "Level[" << ind << "]-> ";
         for(int i = start; i < stop; i++){
-            count << values[i];
+            cout << values[i] << " ";
         }
         cout << endl;
         printIt(ind + 1,count);
+        ind++;
     }
 }
 
@@ -98,7 +99,7 @@ void iPQ::swap(int x, int y) {
 void iPQ::bubbleUp(int index) {
     if (index){
         int par = parent(index);
-        if(values[index] < values[par]){
+        if(values[index] > values[par]){
             swap(values[index],values[par]);
             bubbleUp(par);
         }
