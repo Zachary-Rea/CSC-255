@@ -24,8 +24,8 @@ class iPQ {
         //function for returning index of right child
         void printIt(int ind, int count) const;
         //function for printing by level in tree
-        void swap(int *x, int *y);
-        // functino for swapping two integers
+        void swap(int x, int y);
+        // function for swapping two integers
         void bubbleUp(int index);
         void heapify(int index) ;
 

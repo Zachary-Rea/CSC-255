@@ -1,0 +1,20 @@
+Tree count is 100
+Tree contents are: 
+Level[0]->
+Level[1]->
+Level[2]->
+Level[3]->
+Level[4]->
+Level[5]->
+Level[6]->
+0: deq got 0 and TRUE
+1: deq got 963 and TRUE
+2: deq got 656 and TRUE
+3: deq got 195 and TRUE
+4: deq got 337 and TRUE
+5: deq got 330 and TRUE
+6: deq got 690 and TRUE
+7: deq got 801 and TRUE
+8: deq got 0 and TRUE
+9: deq got 0 and TRUE
+Tree count is now 0

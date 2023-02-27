@@ -9,7 +9,7 @@ Description: The cpp for Binary Search Tree
 #include "p6.h"
 
 using namespace std;
-
+#include <cmath>
 //******************************************************************************
 //Constructors and De-constructors
 //******************************************************************************
@@ -19,72 +19,116 @@ using namespace std;
 iPQ::iPQ(int n) {
     qCount = 0;
     qCapacity = n;
-    a = new string[n];
+    values = new int[n];
 }
 
 //******************************************************************************
 //de-constructor
 //Written by Parker
 
-  iPQ::~iPQ(){
-    delete[] a;
-  }
+iPQ::~iPQ() {
+    delete[] values;
+}
 
 //******************************************************************************
 //Private Members
+//Written by Zach
 
 int iPQ::parent(int index) const{
-    return 0;
+    int rc;
+    if (index) {
+        rc = (index-1)/2;
+    } else {
+        rc = 0;
+    }
+    return rc;
+}
+
+//******************************************************************************
+//Function for finding left child
+//Written by Zach
+
+int iPQ::left(int index) const{
+    return (2*index)+1;
+}
+
+//******************************************************************************
+//Function for finding right child
+//Written by Zach
+
+int iPQ::right(int index) const{
+    return (left(index)+1);
 }
 //******************************************************************************
 //function to print tree by level
 //written by Parker
 
-void iPQ::printIt(int r){
-    int start, count, stop;
-    count = 1 << r;
+void iPQ::printIt(int ind, int count) const{
+    int start, stop;
+    count = 1 << ind;
     start = count -1;
     stop = start + count;
-    if(start < treeCount){
-        if(stop > treeCount){
-            stop = treeCount;
+    if(start < qCount){
+        if(stop > qCount){
+            stop = qCount;
         }
-        count << "row" << r << ":";
+        cout << "Level[" << ind << "]->";
         for(int i = start; i < stop; i++){
-            count << a[i];
+            count << values[i];
         }
-        count << endl;
-        printIt(r + 1);
+        cout << endl;
+        printIt(ind + 1,count);
     }
 }
 
 //******************************************************************************
 //Function to swap two integers with each other
+//Written by Zach
 
-void swap (int *x, int *y){
-
+void iPQ::swap(int x, int y) {
+    values[qCount] = values[x];
+    values[x] = values[y];
+    values[y] = values[qCount];
 }
 
 //******************************************************************************
 //Function to perform heap Bubble-Up operation
 //written by Parker
 
-void iPQ::bubbleUp (int index){
+void iPQ::bubbleUp(int index) {
     if (index){
-        int par = (treeCount /2-1)(index);
-        if(a[index] < a [par]){
-            swap(a[index],a[par])
-            bubbleUp (par);
+        int par = parent(index);
+        if(values[index] < values[par]){
+            swap(values[index],values[par]);
+            bubbleUp(par);
         }
     }
 }
- 
+
 //******************************************************************************
 //Function to perform heapify operation
+//Written by Zach
 
-
-void heapify (int index){
-
+void iPQ::heapify(int index) {
+    if (index) {
+        int larger = index;
+        int l = left(index);
+        if (l < qCount) {
+            if (values[l] > values[larger]) {
+                larger = l;
+            }
+            int r = right(index);
+            if (r < qCount) {
+                if (values[r] > values[larger]) {
+                    larger = r;
+                }
+            }
+        }
+        if (index != larger) {
+            swap(values[index],values[larger]);
+            heapify(larger);
+        }
+    }
 }
 
 //******************************************************************************
@@ -93,12 +137,12 @@ void heapify (int index){
 //Enques value into iPQ; returns true for success; false if full
 //Written by Parker
 
-bool iPQ::enq(string text){
+bool iPQ::enq(int v) {
     bool rc = false;
-    if(treeCount < treeCap){
-        a[treeCount] = text;
-        bubbleUp (treeCount);
-        treeCount++;
+    if(qCount < qCapacity){
+        values[qCount] = v;
+        bubbleUp (qCount);
+        qCount++;
         rc = true;
     }
     return rc;
@@ -108,20 +152,37 @@ bool iPQ::enq(string text){
 //returns true if IPQ is not empty; removes & returns max value, false if empty
 //Written by Parker
 
-bool iPQ::deq(string &text){
-    bool rc = treeCount > 0;
+bool iPQ::deq(int &v) {
+    bool rc = qCount > 0;
     if (rc){
-        text = a[0];
-        treeCount --;
-        a[0] = a[treeCount];
-        heapify (0);
+        v = values[0];
+        qCount--;
+        values[0] = values[qCount];
+        heapify(0);
     }
     return rc;
 }
 
 //******************************************************************************
-//clear
+//Function for printing the array 
+//Written by Zach
 
+void iPQ::printIt() const{
+    printIt(0,0);
+}
 
+//******************************************************************************
+//Function for clearing the contents of the array
+//Written by Zach
 
+void iPQ::clear() {
+    qCount = 0;
+}
 
+//******************************************************************************
+//Function for returning the size of the array
+//Written by Zach
+
+int iPQ::count() const{
+    return qCount;
+}
