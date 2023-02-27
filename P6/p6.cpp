@@ -16,30 +16,31 @@ using namespace std;
 //Constructor
 //Written by Parker
 
-iPQ::iPQ(int n){
-treeCount=0;
-
+iPQ::iPQ(int n) {
+    qCount = 0;
+    qCapacity = n;
+    a = new string[n];
 }
 
 //******************************************************************************
 //de-constructor
 //Written by Parker
 
-    void clear() {
-        int n = 0;
-    }
+  iPQ::~iPQ(){
+    delete[] a;
+  }
 
 //******************************************************************************
 //Private Members
 
-int parent(int index) const{
+int iPQ::parent(int index) const{
     return 0;
 }
 //******************************************************************************
 //function to print tree by level
 //written by Parker
 
-void printIt(int r){
+void iPQ::printIt(int r){
     int start, count, stop;
     count = 1 << r;
     start = count -1;
@@ -57,8 +58,6 @@ void printIt(int r){
     }
 }
 
-
-
 //******************************************************************************
 //Function to swap two integers with each other
 
@@ -70,7 +69,7 @@ void swap (int *x, int *y){
 //Function to perform heap Bubble-Up operation
 //written by Parker
 
-void bubbleUp (int index){
+void iPQ::bubbleUp (int index){
     if (index){
         int par = (treeCount /2-1)(index);
         if(a[index] < a [par]){
@@ -94,12 +93,12 @@ void heapify (int index){
 //Enques value into iPQ; returns true for success; false if full
 //Written by Parker
 
-bool enq(text){
+bool iPQ::enq(string text){
     bool rc = false;
     if(treeCount < treeCap){
-        a[tc] = text;
-        bubbleUp (tc);
-        tC++;
+        a[treeCount] = text;
+        bubbleUp (treeCount);
+        treeCount++;
         rc = true;
     }
     return rc;
@@ -109,13 +108,13 @@ bool enq(text){
 //returns true if IPQ is not empty; removes & returns max value, false if empty
 //Written by Parker
 
-bool deq(String & text){
-    bool rc = tc > 0;
+bool iPQ::deq(string &text){
+    bool rc = treeCount > 0;
     if (rc){
-        text = a [0];
-        tC --;
-        a[0] = a[tc];
-        heipify (0);
+        text = a[0];
+        treeCount --;
+        a[0] = a[treeCount];
+        heapify (0);
     }
     return rc;
 }
