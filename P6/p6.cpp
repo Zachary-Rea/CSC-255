@@ -87,9 +87,9 @@ void iPQ::printIt(int ind, int count) const{
 //Written by Zach
 
 void iPQ::swap(int x, int y) {
-values[qCount] = values[x];
+int t = values[x];
 values[x] = values[y];
-values[y] = values[qCount];
+values[y] = t;
 }
 
 //******************************************************************************
