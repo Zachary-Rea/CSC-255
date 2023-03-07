@@ -12,7 +12,23 @@ Description:
 using namespace std;
 
 //******************************************************************************
-bool intList::
+//New pulbic Member Functions 
+
+void bubbleSort(){
+
+}
+
+void selectionSort(){
+
+}
+
+void insertionSort(){
+
+}
+
+bool isSorted() const {
+
+}
 
 stringList::stringList (int listCapacity) { //Zach
     this->listCapacity = listCapacity;  //set the capacity of the list to the passed in value 
