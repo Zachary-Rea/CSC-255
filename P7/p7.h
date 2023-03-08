@@ -29,8 +29,8 @@ public:
     int capacity() const;//Zach
     //Sorting Functions
     void bubbleSort();
-    void selectionSort(int n);
-    void insertionSort(int n, int tmp);
+    void selectionSort();
+    void insertionSort();
     //Sorting Check
     bool isSorted() const;
     //Swap Function 
