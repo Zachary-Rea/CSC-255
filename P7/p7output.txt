@@ -1,0 +1,10 @@
+n = 20000
+***********************************************************
+The time to do the bubbleSort was: 0.0001ms
+The list is NOT sorted
+***********************************************************
+The time to do the selectionSort was:     0ms
+The list is NOT sorted
+***********************************************************
+The time to do the insertionSort was:     0ms
+The list is NOT sorted
