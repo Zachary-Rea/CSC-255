@@ -17,10 +17,10 @@ doWork1(intList *list, int sortMethod) {
 	bool rc;
 	list->clear();
 	for (i = 0; i < list->capacity(); i++) {
-		list->add(20 + i);
+		list->add(20 - i);
 	}
 	rc = list->insert(10);
-	cout << list->capacity() << rc << "\n";
+	cout << list->capacity() << "\n";
 	list->bubbleSort();
 	list->printIt(20);
 }

@@ -32,8 +32,6 @@ msDiffTime(struct timespec start, struct timespec finish) {
 void
 doWork1(intList *list, int sortMethod) {
     // sortMethod = 0 for bubble, 1 for selection, 2 for insertion
-    cout << "the size is " << list->capacity() << "\n";
-
     int i, v;
     bool rc;
 
@@ -44,7 +42,7 @@ doWork1(intList *list, int sortMethod) {
 
     srand(1); // seed so we get the same random numbers for each iteration of j
     for (i = 0; i < list->capacity(); i++) {
-	v = rand() % OneMillion;
+	v = rand() % 1000000;
 	rc = list->add(v);
 	if (!rc) {
 	    cerr << "add failed\n";

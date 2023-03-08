@@ -34,7 +34,7 @@ public:
     //Sorting Check
     bool isSorted() const;
     //Swap Function 
-    void swap(int &i, int &j) const;
+    void swap(int *i, int *j) const;
 };
 
 #endif
