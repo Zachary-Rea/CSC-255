@@ -98,7 +98,7 @@ void intList::clear() {
 //Function to print n of the list
 //Written and modified by Zach
 void intList::printIt(int n) const{
-    cout << "printIt with list size: " << listSize << " capacity: ";
+    cout << "printIt with list size: " << listSize << " capacity = ";
     cout << listCapacity << "\n";
     if (n < listSize) {
         for (int i = 0; i < n - 1; i++) {
@@ -164,14 +164,23 @@ void intList::bubbleSort() {
 //Function to sort the array via selection method 
 //Written by Parker
 void intList::selectionSort() {
-
+    for (int i = 0, j, least; i < listSize-1; i++){
+        for (j = i+1, least = i; j < listSize; j++)
+            if (a[j] < a[least])
+                least = j;
+                swap(&a[least],&a[i]);
+    }
 }
-
 //******************************************************************************
 //Function to sort the array via the insertion method 
 //Written by Parker
 void intList::insertionSort() {
-
+    for (int i = 1, j; i < listSize; i++){
+        int tmp = a[i];
+        for (j = i; j > 0 && tmp < a[j-1]; j--)
+            a[j] = a[j-1];
+            a[j] = tmp;
+    }
 }
 
 //******************************************************************************
