@@ -26,13 +26,15 @@ public:
     void printIt(int n) const;//Zach
     int getIndex(int key) const;
     int readAt(int index, int &key) const; //parker
-    int count() const;//Zach
+    int capacity() const;//Zach
     //Sorting Functions
     void bubbleSort();
     void selectionSort();
     void insertionSort();
     //Sorting Check
     bool isSorted() const;
+    //Swap Function 
+    void swap(int &i, int &j) const;
 };
 
 #endif

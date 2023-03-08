@@ -32,6 +32,7 @@ msDiffTime(struct timespec start, struct timespec finish) {
 void
 doWork1(intList *list, int sortMethod) {
     // sortMethod = 0 for bubble, 1 for selection, 2 for insertion
+    cout << "the size is " << list->capacity() << "\n";
 
     int i, v;
     bool rc;

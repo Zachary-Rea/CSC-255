@@ -36,7 +36,7 @@ bool intList::insert(int key) {
     bool rc = listCapacity > listSize;
     if (rc) {
         for (int i = listSize; i > 0; i--) {
-            a [i] = a[i-1];
+            a[i] = a[i-1];
         }
         a[0] = key;
         listSize++;
@@ -48,10 +48,11 @@ bool intList::insert(int key) {
 //Fucntion to add an int to the end of the list
 //Written by Parker modified by Zach
 bool intList::add(int key) {
-    bool rc = listCapacity > listSize;
-    if (rc) { 
-        a [listSize] = key;
+    bool rc;
+    if (listSize < listCapacity) { 
+        a[listSize] = key;
         listSize++;
+        rc = true;
     }
     return rc;
 }
@@ -99,12 +100,12 @@ void intList::clear() {
 void intList::printIt(int n) const{
     if (n < listSize) {
         for (int i = 0; i < n - 1; i++) {
-            cout << "At pos " << i << " there is " << a[i];
+            cout << "At pos " << i << " there is " << a[i] << "\n";
         }
         cout << "At pos " << listSize << " there is " << a[listSize - 1];
     } else {
         for (int i = 0; i < listSize; i++) {
-            cout << "At pos " << i << " there is " << a[i];
+            cout << "At pos " << i << " there is " << a[i] << "\n";
         }
     }
 }
@@ -138,7 +139,7 @@ int intList::readAt(int index, int &key) const{
 //******************************************************************************
 //Function to return the current size of the list
 //Written and modiefied by Zach
-int intList::count() const{
+int intList::capacity() const{
     return listSize;
 }
 
@@ -146,19 +147,14 @@ int intList::count() const{
 //Fucntion to sort the array via bubble method
 //Written by Zach
 void intList::bubbleSort() {
-    if (listSize) {
+    if (listSize > 0) {
         int i = 0;
-        int j = 1;
-        if (j < listSize - 1) {
-            if (a[i] > a[j]) {
-                int s = a[i];
-                a[i] = a[j];
-                a[j] = s;
+        if (i < listSize) {
+            if (a[i] > a[i + 1]) {
+                swap(a[i],a[i + 1]);
                 i++;
-                j++;
             } else {
                 i++;
-                j++;
             }
         }
     }
@@ -184,14 +180,21 @@ void intList::insertionSort() {
 bool intList::isSorted() const{
     bool rc;
     int i = 0;
-    int j = 1;
-    if ((a[i] < a[j]) && (j < listSize)) {
+    if (a[i] <= a[i + 1]) {
         i++;
-        j++;
         rc = true;
     } else {
         rc = false;
-        cout << "Index " << i << " is greater that index " << j;
+        cout << "Index " << i << " is greater than index " << i + 1 << " ";
     }
     return rc;
+}
+
+//******************************************************************************
+//Function to swap the values
+//Written by Zach
+void intList::swap(int &i, int &j) const{
+    int s = a[i];
+    a[i] = a[j];
+    a[j] = s;
 }
