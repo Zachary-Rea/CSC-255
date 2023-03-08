@@ -163,7 +163,7 @@ void intList::bubbleSort() {
 //******************************************************************************
 //Function to sort the array via selection method 
 //Written by 
-void intList::selectionSort() {
+void intList::selectionSort(int n) {
   for (int i = 0,j, least; i < n-1; i++){
         for(j = i+1, least = i; j < n; j++)
             if (a[j] < a[least])
@@ -175,7 +175,7 @@ void intList::selectionSort() {
 //******************************************************************************
 //Function to sort the array via the insertion method 
 //Written by 
-void intList::insertionSort() {
+void intList::insertionSort(int n, int tmp) {
     for (int i = 1, j; i < n; i++){
         tmp = a[i];
         for (j = i; j > 0 && tmp < a[j-1]; j--)
