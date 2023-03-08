@@ -164,14 +164,24 @@ void intList::bubbleSort() {
 //Function to sort the array via selection method 
 //Written by 
 void intList::selectionSort() {
-
+  for (int i = 0,j, least; i < n-1; i++){
+        for(j = i+1, least = i; j < n; j++)
+            if (a[j] < a[least])
+                least = j;
+                swap (a[least],a[i]);
+    }
 }
 
 //******************************************************************************
 //Function to sort the array via the insertion method 
 //Written by 
 void intList::insertionSort() {
-
+    for (int i = 1, j; i < n; i++){
+        tmp = a[i];
+        for (j = i; j > 0 && tmp < a[j-1]; j--)
+            a[j] = a[j-1];
+            a[j] = tmp;
+    }
 }
 
 //******************************************************************************
