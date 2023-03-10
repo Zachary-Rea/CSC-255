@@ -119,5 +119,4 @@ main(int argc, char *argv[]) {
     doWork1(myL, 0);
     doWork1(myL, 1);
     doWork1(myL, 2);
-    doWork1(myL, 3);
 }

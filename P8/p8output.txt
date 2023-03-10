@@ -1,0 +1,43 @@
+n = 10
+***********************************************************
+The time to do the bubbleSort was: 0.0002ms
+The list is sorted
+printIt with list size: 10 capacity = 10
+At pos 0 there is 158119
+At pos 1 there is 216262
+At pos 2 there is 349752
+At pos 3 there is 377743
+At pos 4 there is 391529
+At pos 5 there is 417256
+At pos 6 there is 475508
+At pos 7 there is 669700
+At pos 8 there is 765933
+At pos 9 there is 887256
+***********************************************************
+The time to do the selectionSort was: 0.0003ms
+The list is sorted
+printIt with list size: 10 capacity = 10
+At pos 0 there is 158119
+At pos 1 there is 216262
+At pos 2 there is 349752
+At pos 3 there is 377743
+At pos 4 there is 391529
+At pos 5 there is 417256
+At pos 6 there is 475508
+At pos 7 there is 669700
+At pos 8 there is 765933
+At pos 9 there is 887256
+***********************************************************
+The time to do the insertionSort was: 0.0002ms
+The list is sorted
+printIt with list size: 10 capacity = 10
+At pos 0 there is 158119
+At pos 1 there is 216262
+At pos 2 there is 349752
+At pos 3 there is 377743
+At pos 4 there is 391529
+At pos 5 there is 417256
+At pos 6 there is 475508
+At pos 7 there is 669700
+At pos 8 there is 765933
+At pos 9 there is 887256

@@ -1,8 +1,8 @@
 /*
-Filename: p9.cpp
+Filename: p8.cpp
 Author(s): Zachary Rea and Parker Ross
 Date: March 8 2023
-Description:
+Description: The cpp for p8
 */
 #include "P8.h"
 #include <iostream>
@@ -154,7 +154,7 @@ void intList::bubbleSort() {
         for (int i = listSize; i > 1; i--) {
             for (int j = 0; j < i-1; j++) {
                 if (a[j] > a[j+1]) {
-                    swap(&a[j],&a[j+1]);
+                    swap(a[j],a[j+1]);
                 }
             }
         }
@@ -169,7 +169,7 @@ void intList::selectionSort() {
         for (j = i+1, least = i; j < listSize; j++)
             if (a[j] < a[least])
                 least = j;
-                swap(&a[least],&a[i]);
+                swap(a[least],a[i]);
     }
 }
 //******************************************************************************
@@ -219,10 +219,10 @@ int intList::right(int index) const{
 //******************************************************************************
 //Function to swap two integers with each other
 //Written by Zach modified by Parker
-void intList::swap(int x, int y) {
-int tmp = x;
-x = y;
-y = tmp;
+void intList::swap(int &x, int &y){
+    int s = x;
+    x = y;
+    y = s;
 }
 
 //******************************************************************************
@@ -234,13 +234,13 @@ void intList::heapify(int index) {
         int l = left(index);
         if (l < heapSize) {
             //check if left is larger
-            if (values[l] > values[larger]) {
+            if (a[l] > a[larger]) {
                 larger = l;
             }
             int r = right(index);
             if (r < heapSize) {
                 //check if right is larger
-                if (values[r] > values[larger]) {
+                if (a[r] > a[larger]) {
                     larger = r;
                 }
             }
@@ -249,6 +249,35 @@ void intList::heapify(int index) {
         if (index != larger) {
             swap(index,larger);
             heapify(larger);
+        }
+    }
+}
+
+//******************************************************************************
+//New Functions
+//******************************************************************************
+//Function to sort the heap 
+//Written by 
+void intList::heapSort(){
+    if (a) {
+        buildHeap();
+        heapSize = listSize;
+        while (heapSize) {
+            swap(a[0],a[heapSize - 1]);
+            heapSize--;
+            heapify(0);
+            }
+    }
+}
+
+//******************************************************************************
+//Function to build the superimposed heap
+//Written by 
+void intList::buildHeap(){
+    if (a) {
+        int parent = (heapSize/2) - 1;
+        for (int i = parent; i >= 0; i--) {
+            heapify(i);
         }
     }
 }

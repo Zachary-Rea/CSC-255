@@ -13,6 +13,7 @@ private:
     int *a;
     int listCapacity;
     int listSize;
+    int heapSize;
 public:
     //Constructors and Destructors
     intList (int listCapacity = 100);//Zach
@@ -33,12 +34,14 @@ public:
     void insertionSort();
     //Sorting Check
     bool isSorted() const;
-    //Swap Function 
-
-    int intList::left(int index) const;
-    int intList::right(int index) const;
-    int intList::swap(int &x, int &y);
-    void intList::heapify(int index);
+    //Program 6 Functions
+    void heapify(int index);
+    void swap(int &x, int &y);
+    int left(int index) const;
+    int right(int index) const;
+    //New Functions
+    void heapSort();
+    void buildHeap();
 };
 
 #endif
