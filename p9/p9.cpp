@@ -9,95 +9,248 @@ Description: The cpp for p9
 
 using namespace std;
 
+//intList class
 //******************************************************************************
-//Public Methods
+//Constructors and Destructors
 //******************************************************************************
-Graph(int n =100, bool directed = true)
-//sets up the empty graph
-//Allocates “a”, an n*n sized array, and labels, an n-sized array.  
-//Sets all values of a to zero.  Allocates the labels intList.  
-//Sets vCount and eCount to 0. And more.
-
-~Graph(); // deletes the array “a”
-
-
+//Constructor
+//Written by Zach
+intList::intList (int listCapacity) {
+    this->listCapacity = listCapacity;
+    a = new int[listCapacity];
+    listSize = 0;
+}
 //******************************************************************************
-bool createV(int label);
-//creates the node labeled by the parameter; 
-//returns true if label not already used and there is a label table entry left to be allocated to the label; 
-//returns false otherwise.  I.e., this requires vCount < n to allocate a node to a label.
-
-//If all went well, then labels[latestIndex] gets set to “label”, where latestIndex is the new vCount - 1.
-
-
+//Destructor
+//Written by Zach
+intList::~intList() {
+    delete[] a;
+}
 //******************************************************************************
-bool deleteEdge(int uLabel, int vLabel); 
-//deletes the edge, if the edge had been set and decrements eCount;
-//returns true if it deletes it; 
-//returns false if the edge was already deleted; returns false if the labels didn’t match existing nodes.
-
-
+//Public Functions 
 //******************************************************************************
-void clear(); 
-//causes the graph to be reset to its original state, with no vertices or edges
-
-
+//Function to insert a value at the start of the list
+//Written by Parker modified by Zach
+bool intList::insert(int key) {
+    bool rc = listCapacity > listSize;
+    if (rc) {
+        for (int i = listSize; i > 0; i--) {
+            a[i] = a[i-1];
+        }
+        a[0] = key;
+        listSize++;
+    }
+    return rc;
+}
 //******************************************************************************
-bool isEdge (int uLabel, int vLabel) const;
-//returns true if the edge exists;
-//returns false if the node labels are not both assigned to a node or if the edge does not exist (weight == 0).
-
+//Fucntion to add an int to the end of the list
+//Written by Parker modified by Zach
+bool intList::add(int key) {
+    bool rc;
+    if (listSize < listCapacity) { 
+        a[listSize] = key;
+        listSize++;
+        rc = true;
+    }
+    return rc;
+}
 //******************************************************************************
-bool isV(int label) const; 
-//return true if there is a node labeled by label
-
-
+//Function to insert a value at a given index of the list
+//Written by Parker modified by Zach
+bool intList::insertAt(int index, int key) {
+    bool rc = listCapacity > listSize && index < listSize && index >= 0; 
+    if (rc) {
+        for (int i = listSize; i > index; i--) {
+            a [i] = a[i-1];
+        }
+        a[index] = key;
+        listSize++; 
+    } 
+    return rc;
+}
 //******************************************************************************
-int inDegree(int label) const; 
-//return inD of the node; -1 if the node does not existint outDegree(int label) const 
-//return outD of the node; -1 if the node does not exist
-
-
+//Function to delete a value at a given index of the list
+//Written by Parker modified by Zach
+bool intList::deleteAt(int index, int &key) {
+    bool rc = listSize > index && index >= 0;
+        if (rc) {
+            key = a[index];
+            for (int i = index; i < listSize; i++) {
+                a[i] = a[i+1];
+            }
+        listSize--; 
+    }
+    return rc;
+}
 //******************************************************************************
-int sizeV() const; 
-//returns the largest size the graph could be (n).
-
-
+//Function to set the size to 0
+//Written and modified by Zach
+void intList::clear() {
+    listSize = 0;
+}
 //******************************************************************************
-int sizeUsedV() const; 
-//returns the number of nodes actually used, vCount
-
-
+//Function to print n of the list
+//Written and modified by Zach
+void intList::printIt(int n) const{
+    cout << "printIt with list size: " << listSize << " capacity = ";
+    cout << listCapacity << "\n";
+    if (n < listSize) {
+        for (int i = 0; i < n; i++) {
+            cout << "At pos " << i << " there is " << a[i] << "\n";
+        }
+        cout << "At pos " << listSize - 1 << " there is " << a[listSize - 1];
+        cout << "\n";
+    } else {
+        for (int i = 0; i < listSize; i++) {
+            cout << "At pos " << i << " there is " << a[i] << "\n";
+        }
+    }
+}
 //******************************************************************************
-int sizeE() const; 
-//returns the number of edges in the graph, eCount
-
-
+//Function to return the index of a given value
+//Written and modified by Zach
+int intList::getIndex(int key) const{
+    int rc = -1;
+    for (int i = 0;i < listSize - 1;i++) {
+        if (a[i] == key) {
+            rc = i;
+            break;
+        }
+    }
+    return rc;
+}
 //******************************************************************************
-printIt() const; 
-// prints the graph; see sample output for proper format
-
+//Function to read the value at a given index
+//Written by Parker modified by Zach
+int intList::readAt(int index, int &key) const{
+    int rc = -1;
+    if (index < listSize && index >= 0) {
+        rc = index;
+        key = a[index];
+    }
+    return rc;
+}
 //******************************************************************************
-//Private Methods
+//Function to return the current size of the list
+//Written and modiefied by Zach
+int intList::capacity() const{
+    return listCapacity;
+}
 //******************************************************************************
-int ind(int x, int y) const; 
-//returns the mapping of x,y to index; uses least vertex id first for undirected graphs
-
-
-
+//Graph class
 //******************************************************************************
-int labelToVid(int label) const; 
-//returns the vertex index for the given label
-//returns -1 if no node has that label
-
-
+//Constructors and Destructors
 //******************************************************************************
-//Private Variables
-//******************************************************************************
-int *a; // the array for the graph; size will be n*n
-intList *labels; // stores the labels of the edge; size will be n
-int n; // memorializes the dimensions of the graph matrix
-int vCount; // tracks the number of nodes in the graph
-int eCount; // tracks the number of edges in the graph
-bool directed; // remembers whether the graph is directed or not
+//Constructor 
+//Written by 
+Graph::Graph(int n, bool directed) {
 
+}
+//******************************************************************************
+//Destructor
+//Written by 
+Graph::~Graph() {
+
+}
+//******************************************************************************
+//Private Functions
+//******************************************************************************
+//Function to return the mapping of x,y
+//Written by 
+int Graph::ind(int x, int y) const{
+
+}
+//******************************************************************************
+//Function to return the vertex index of a given label
+//Written by 
+int Graph::labelToVid(int label) const{
+
+}
+//******************************************************************************
+//Public Functions
+//******************************************************************************
+//Function to create a vertex
+//Written by 
+bool Graph::createV(int label) {
+
+}
+//******************************************************************************
+//Function to add an edge between two vertices
+//Written by 
+bool Graph::addEdge(int uLabel, int vLabel, int weight) {
+
+}
+//******************************************************************************
+//Function to delete an edge between two vertices
+//Written by 
+bool Graph::deleteEdge(int uLabel, int vLabel) {
+
+}
+//******************************************************************************
+//Function to clear the graph 
+//Written by 
+void Graph::clear() {
+
+}
+//******************************************************************************
+//Function to check if there is an edge between two vertices
+//Written by 
+bool Graph::isEdge(int uLabel, int vLabel) const{
+
+}
+//******************************************************************************
+//Function to check if there is a vertex at a given location
+//Written by 
+bool Graph::isV(int label) const{
+
+}
+//******************************************************************************
+//Function to return the in degree of a given label
+//Written by
+int Graph::inDegree(int label) const{
+
+}
+//******************************************************************************
+//Function to return the out degree of a given label
+//Written by 
+int Graph::outDegree(int label) const{
+
+}
+//******************************************************************************
+//Function to return the number of vertices possible
+//Written by 
+int Graph::sizeV() const{
+
+}
+//******************************************************************************
+//Function to return the number of vertices
+//Written by 
+int Graph::sizeUsedV() const{
+
+}
+//******************************************************************************
+//Function to return the number of edges
+//Written by 
+int Graph::sizeE() const{
+
+}
+//******************************************************************************
+//Function to print the contents of the graph 
+//Written by 
+void Graph::printIt() const{
+
+}
+//******************************************************************************
+//Non-Member Functions
+//******************************************************************************
+//Function to return the min of two values
+//Written by 
+int min(int x, int y) {
+
+}
+//******************************************************************************
+//Function to return the max of two values
+//Written by 
+int max(int x, int y) {
+
+}
