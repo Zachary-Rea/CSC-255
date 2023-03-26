@@ -163,7 +163,7 @@ void intList::bubbleSort() {
 
 //******************************************************************************
 //Function to sort the array via selection method 
-//Written by Parker
+//Parker pulled from the Book 
 void intList::selectionSort() {
     for (int i = 0, j, least; i < listSize-1; i++){
         for (j = i+1, least = i; j < listSize; j++)
@@ -174,7 +174,7 @@ void intList::selectionSort() {
 }
 //******************************************************************************
 //Function to sort the array via the insertion method 
-//Written by Parker
+//Parker pulled from the book 
 void intList::insertionSort() {
     for (int i = 1, j; i < listSize; i++){
         int tmp = a[i];
