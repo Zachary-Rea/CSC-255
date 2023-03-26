@@ -271,6 +271,8 @@ void intList::heapSort(){
 //******************************************************************************
 //Function to build the superimposed heap
 //Written by Zach
+
+
 void intList::buildHeap(){
     if (listSize > 0) {
         int parent = (heapSize/2) - 1;
