@@ -39,7 +39,7 @@ int Graph::ind(int x, int y) const{
 }
 //******************************************************************************
 //Function to return the vertex id of a given label
-//Written by 
+//Written by Zach
 int Graph::labelToVid(int label) const{
     int rc = -1;
     bool check = isV(label);
@@ -95,7 +95,7 @@ bool Graph::addEdge(int uLabel, int vLabel, int weight) {
 }
 //******************************************************************************
 //Function to delete an edge between two vertices
-//Written by 
+//Written by Zach
 bool Graph::deleteEdge(int uLabel, int vLabel) {
     bool rc = false;
     bool checkw = isEdge(uLabel,vLabel);
@@ -108,15 +108,30 @@ bool Graph::deleteEdge(int uLabel, int vLabel) {
 }
 //******************************************************************************
 //Function to clear the graph 
-//Written by 
+//Written by Parker
 void Graph::clear() {
-
+//causes the graph to be reset to its original state, with no vertices or edges
+int ecount = 0;
+int vcount = 0;
+    for (int i = 0; i < n*n ; i++){
+        a [i] = 0;
+    }
+    labels->clear ();
 }
 //******************************************************************************
 //Function to check if there is an edge between two vertices
-//Written by 
+//Written by Parker
 bool Graph::isEdge(int uLabel, int vLabel) const{
-    return false;
+    bool rc = false;
+    int uVid = labelToVid(uLabel);
+    int vVid = labelToVid(vLabel);
+    if ((uVid >= 0 && vVid >=0)){
+        
+        if (){
+            rc = true;
+        }
+    }  
+    return rc;
 }
 //******************************************************************************
 //Function to check if there is a vertex at a given location
@@ -126,37 +141,51 @@ bool Graph::isV(int label) const{
 }
 //******************************************************************************
 //Function to return the in degree of a given label
-//Written by
+//Written by Parker
 int Graph::inDegree(int label) const{
-    return 0;
+    int inD = 0;
+    if (inD){
+        inD = true;
+    
+        } else {
+            inD = -1;
+        }
+        return inD;
 }
 //******************************************************************************
 //Function to return the out degree of a given label
-//Written by 
+//Written by Parker
 int Graph::outDegree(int label) const{
-    return 0;
+    int outD = 0;
+    if (outD){
+        outD = true;
+    
+        } else {
+            outD = -1;
+        }
+        return outD;
 }
 //******************************************************************************
 //Function to return the number of vertices possible
-//Written by 
+//Written by Parker
 int Graph::sizeV() const{
-    return 0;
+    return n;
 }
 //******************************************************************************
 //Function to return the number of vertices
-//Written by 
+//Written by Parker
 int Graph::sizeUsedV() const{
-    return 0;
+    return vCount;
 }
 //******************************************************************************
 //Function to return the number of edges
-//Written by 
+//Written by Parker
 int Graph::sizeE() const{
-    return 0;
+    return eCount;
 }
 //******************************************************************************
 //Function to print the contents of the graph 
-//Written by 
+//Written by Zach
 void Graph::printIt() const{
     int r, c;
 
@@ -184,7 +213,7 @@ void Graph::printIt() const{
 //Non-Member Functions
 //******************************************************************************
 //Function to return the min of two values
-//Written by 
+//Written by Zach
 int min(int x, int y) {
     int rc = 0;
     if (x < y) {
@@ -196,7 +225,7 @@ int min(int x, int y) {
 }
 //******************************************************************************
 //Function to return the max of two values
-//Written by 
+//Written by Zach
 int max(int x, int y) {
     int rc = 0;
     if (x > y) {
