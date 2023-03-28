@@ -125,9 +125,8 @@ bool Graph::isEdge(int uLabel, int vLabel) const{
     bool rc = false;
     int uVid = labelToVid(uLabel);
     int vVid = labelToVid(vLabel);
-    if ((uVid >= 0 && vVid >=0)){
-        
-        if (){
+    if ((uVid & vVid >=0)){
+        if (a[ind(uVid,vVid)] != 0){ //???
             rc = true;
         }
     }  
@@ -144,27 +143,34 @@ bool Graph::isV(int label) const{
 //Written by Parker
 int Graph::inDegree(int label) const{
     int inD = 0;
-    if (inD){
-        inD = true;
-    
-        } else {
-            inD = -1;
+    int vVid = labelToVid(label); //??
+    for(int i = 0; i <vCount; i++){
+        if (a[ind(i, vVid)] != 0){ //??
+            inD++;
         }
-        return inD;
+    }
+    if (!inD){
+        inD = -1;
+    }
+    return inD;
 }
 //******************************************************************************
 //Function to return the out degree of a given label
 //Written by Parker
 int Graph::outDegree(int label) const{
     int outD = 0;
-    if (outD){
-        outD = true;
-    
-        } else {
-            outD = -1;
+    int uVid = labelToVid(label); //??
+    for (int i = 0; i < n; i++){ 
+        if (a[ind(uVid, i)] != 0){  //??
+            outD++;
         }
-        return outD;
+         }
+    if (!outD){
+        outD = -1;
+    }
+    return outD;
 }
+   
 //******************************************************************************
 //Function to return the number of vertices possible
 //Written by Parker
