@@ -110,7 +110,6 @@ bool Graph::deleteEdge(int uLabel, int vLabel) {
 //Function to clear the graph 
 //Written by Parker
 void Graph::clear() {
-//causes the graph to be reset to its original state, with no vertices or edges
 int ecount = 0;
 int vcount = 0;
     for (int i = 0; i < n*n ; i++){
@@ -125,32 +124,39 @@ bool Graph::isEdge(int uLabel, int vLabel) const{
     bool rc = false;
     int uVid = labelToVid(uLabel);
     int vVid = labelToVid(vLabel);
-    if ((uVid & vVid >=0)){
-        if (a[ind(uVid,vVid)] != 0){ //???
-            rc = true;
-        }
+    if ((uVid >= 0) && (vVid >= 0)){
+        rc = ((a[uVid] > 0) && (a[vVid] > 0));
     }  
     return rc;
 }
 //******************************************************************************
 //Function to check if there is a vertex at a given location
-//Written by 
-bool Graph::isV(int label) const{
-    return false;
+//Written by Zach
+ bool Graph::isV(int label) const {
+    int rc = false;
+    int key;
+    for (int i = 0; i < labels->count(); i++) {
+        int check = labels->readAt(i,key);
+        if (key == label) {
+            rc = true;
+        }
+    }
+    return rc;
 }
+
 //******************************************************************************
 //Function to return the in degree of a given label
 //Written by Parker
 int Graph::inDegree(int label) const{
+    int vVid = labelToVid(label);
     int inD = 0;
-    int vVid = labelToVid(label); //??
-    for(int i = 0; i <vCount; i++){
-        if (a[ind(i, vVid)] != 0){ //??
+    for(int i = 0; i < n; i++){
+        if (a[ind(i, vVid)] != 0){ 
             inD++;
         }
-    }
-    if (!inD){
+        if (!inD){
         inD = -1;
+        }
     }
     return inD;
 }
@@ -158,15 +164,15 @@ int Graph::inDegree(int label) const{
 //Function to return the out degree of a given label
 //Written by Parker
 int Graph::outDegree(int label) const{
+    int uVid = labelToVid(label);
     int outD = 0;
-    int uVid = labelToVid(label); //??
     for (int i = 0; i < n; i++){ 
-        if (a[ind(uVid, i)] != 0){  //??
+        if (a[ind(uVid, i)] != 0){ 
             outD++;
+        } 
+        if (!outD){
+        outD = -1; 
         }
-         }
-    if (!outD){
-        outD = -1;
     }
     return outD;
 }

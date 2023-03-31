@@ -129,3 +129,8 @@ int intList::readAt(int index, int &key) const{
     }
     return rc;
 }
+
+int intList::count() {
+    return listSize;
+
+}

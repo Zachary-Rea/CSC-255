@@ -24,7 +24,8 @@ public:
     bool deleteAt (int index,int &key);
     void clear();//Zach
     void printIt(int n) const;//Zach
-    int getIndex(int key) const;
+    int getIndex(int key) const; //zach
     int readAt(int index, int &key) const; //parker
+    int count(); //zach
 };
 #endif
