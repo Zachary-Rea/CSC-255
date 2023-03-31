@@ -59,12 +59,14 @@ int Graph::labelToVid(int label) const{
 //******************************************************************************
 //Function to create a vertex
 //Written by Zach
+
 bool Graph::createV(int label) {
     bool rc = false;
     bool check = isV(label);
     if ((vCount < n) && (!check)) {
         labels->add(label);
         vCount++;
+        rc = true; // added
     }
     return rc;
 }
@@ -120,6 +122,7 @@ int vcount = 0;
 //******************************************************************************
 //Function to check if there is an edge between two vertices
 //Written by Parker
+
 bool Graph::isEdge(int uLabel, int vLabel) const{
     bool rc = false;
     int uVid = labelToVid(uLabel);
@@ -143,7 +146,6 @@ bool Graph::isEdge(int uLabel, int vLabel) const{
     }
     return rc;
 }
-
 //******************************************************************************
 //Function to return the in degree of a given label
 //Written by Parker
@@ -176,7 +178,6 @@ int Graph::outDegree(int label) const{
         }
     return outD;
 }
-   
 //******************************************************************************
 //Function to return the number of vertices possible
 //Written by Parker
@@ -247,3 +248,9 @@ int max(int x, int y) {
     }
     return rc;
 }
+
+/*
+We understand that the output does not
+match the correct output. We hope hear your feedback
+and to make the necessary changes for the 9b submission.
+*/

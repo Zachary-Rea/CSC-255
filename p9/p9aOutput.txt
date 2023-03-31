@@ -1,18 +1,18 @@
 Graph info:
   Graph size = 40
   vCount = 9
-  eCount = 13
+  eCount = 19
 
 Graph contents:
   Node(0,0): 0 2 0 0 0 0 0 0 1
   Node(1,2): 0 0 0 0 0 0 0 1 0
-  Node(2,0): 0 0 0 0 0 0 1 0 2
-  Node(3,0): 0 0 0 0 0 1 0 0 0
+  Node(2,0): 0 0 0 1 0 0 1 0 2
+  Node(3,0): 0 0 0 0 1 1 0 0 0
   Node(4,0): 0 0 0 0 1 0 0 0 0
   Node(5,0): 0 0 0 1 0 0 0 0 0
   Node(6,0): 0 0 1 0 0 0 0 0 0
-  Node(7,0): 0 1 0 0 0 0 0 0 0
-  Node(8,1): 2 0 0 0 0 0 0 0 2
+  Node(7,0): 0 1 0 0 0 0 2 0 0
+  Node(8,1): 2 0 0 0 0 0 0 2 2
 Degree table (in, out)
   Node(0,0): -1, 6
   Node(1,2): -1, 6
