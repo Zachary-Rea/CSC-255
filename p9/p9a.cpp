@@ -153,11 +153,11 @@ int Graph::inDegree(int label) const{
     for(int i = 0; i < n; i++){
         if (a[ind(i, vVid)] != 0){ 
             inD++;
+            }
         }
         if (!inD){
-        inD = -1;
+            inD = -1;
         }
-    }
     return inD;
 }
 //******************************************************************************
@@ -169,11 +169,11 @@ int Graph::outDegree(int label) const{
     for (int i = 0; i < n; i++){ 
         if (a[ind(uVid, i)] != 0){ 
             outD++;
+            }
         } 
         if (!outD){
-        outD = -1; 
+            outD = -1; 
         }
-    }
     return outD;
 }
    
