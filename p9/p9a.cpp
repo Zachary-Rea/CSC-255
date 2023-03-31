@@ -153,13 +153,13 @@ int Graph::inDegree(int label) const{
     int vVid = labelToVid(label);
     int inD = 0;
     for(int i = 0; i < n; i++){
-        if (a[ind(i, vVid)] != 0){ 
+        if (vVid > 0){ 
             inD++;
             }
-        }
-        if (!inD){
+        if(!vVid){
             inD = -1;
-        }
+        }  
+    }
     return inD;
 }
 //******************************************************************************
@@ -169,13 +169,13 @@ int Graph::outDegree(int label) const{
     int uVid = labelToVid(label);
     int outD = 0;
     for (int i = 0; i < n; i++){ 
-        if (a[ind(uVid, i)] != 0){ 
+        if (uVid > 0){ 
             outD++;
             }
-        } 
-        if (!outD){
+            if(!uVid){
             outD = -1; 
-        }
+        } 
+    } 
     return outD;
 }
 //******************************************************************************
@@ -250,8 +250,10 @@ int max(int x, int y) {
 }
 
 /*
-We understand that the output does not
-match the correct output. We hope hear your feedback
-and to make the necessary changes for the 9b submission.
+Dr. Wheat, we understand that the output does not match the correct
+output reguarding the in degree and out degreren functions.
+We also know that somewhere else in the code is causing the 
+ecount to be 3 above what it should We hope to make the necessary
+corrections for the 9b submission.
 */
 

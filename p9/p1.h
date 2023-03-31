@@ -21,7 +21,7 @@ public:
     bool insert (int key); //parker
     bool add (int key); //parker 
     bool insertAt (int index,int key); //parker
-    bool deleteAt (int index,int &key);
+    bool deleteAt (int index,int &key); //Zach
     void clear();//Zach
     void printIt(int n) const;//Zach
     int getIndex(int key) const; //zach
