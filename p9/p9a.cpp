@@ -28,6 +28,7 @@ Graph::Graph(int n, bool directed) {
 //Written by Zach
 Graph::~Graph() {
     delete[] a;
+    delete labels;
 }
 //******************************************************************************
 //Private Functions
@@ -39,9 +40,12 @@ int Graph::ind(int x, int y) const{
 }
 //******************************************************************************
 //Function to return the vertex id of a given label
-//Written by Zach
+//Written by Zach modified by Parker
 int Graph::labelToVid(int label) const{
-    int rc = -1;
+    int rc = labels -> getIndex (label);
+    return rc;
+}
+    /*
     bool check = isV(label);
     if (check) {
         for (int i = 0; i < vCount; i++) {
@@ -54,6 +58,8 @@ int Graph::labelToVid(int label) const{
     }
     return rc;
 }
+*/
+
 //******************************************************************************
 //Public Functions
 //******************************************************************************
@@ -112,12 +118,12 @@ bool Graph::deleteEdge(int uLabel, int vLabel) {
 //Function to clear the graph 
 //Written by Parker
 void Graph::clear() {
-int ecount = 0;
-int vcount = 0;
-    for (int i = 0; i < n*n ; i++){
-        a [i] = 0;
-    }
-    labels->clear ();
+    int ecount = 0;
+    int vcount = 0;
+        for (int i = 0; i < n*n ; i++){
+            a [i] = 0;
+        }
+        labels->clear ();
 }
 //******************************************************************************
 //Function to check if there is an edge between two vertices
@@ -128,14 +134,18 @@ bool Graph::isEdge(int uLabel, int vLabel) const{
     int uVid = labelToVid(uLabel);
     int vVid = labelToVid(vLabel);
     if ((uVid >= 0) && (vVid >= 0)){
-        rc = ((a[uVid] > 0) && (a[vVid] > 0));
+        rc = a [uVid][vVid] > 0;
     }  
     return rc;
 }
 //******************************************************************************
 //Function to check if there is a vertex at a given location
-//Written by Zach
+//Written by Zach modified by Parker 
  bool Graph::isV(int label) const {
+    return labels -> getIndex (label) != -1;
+    }
+
+    /*
     int rc = false;
     int key;
     for (int i = 0; i < labels->count(); i++) {
@@ -146,6 +156,8 @@ bool Graph::isEdge(int uLabel, int vLabel) const{
     }
     return rc;
 }
+*/
+
 //******************************************************************************
 //Function to return the in degree of a given label
 //Written by Parker
