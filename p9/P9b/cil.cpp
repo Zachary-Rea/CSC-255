@@ -84,6 +84,8 @@ bool cIntList::deleteFirst(int &val) {
         }
         listCount--;
         rc = true;
+    } else {
+        val = -1;
     }
     return rc;
 }
@@ -107,8 +109,10 @@ int cIntList::count() const{
 //Written by Parker
 void cIntList::printIt() {
     if (listCount) {
+        int j = first;
         for (int i = 0; i < listCount; i++) {
-            for 
+            cout << "Queue item " << i << " = " << a[j] << "\n";
+            incVal(j);
         }
     }
 }
