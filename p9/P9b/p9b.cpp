@@ -1,11 +1,11 @@
 /*
-Filename: p9.cpp
+Filename: p9b.cpp
 Author(s): Zachary Rea and Parker Ross
-Date: March 26 2023
+Date: 4 April 2023
 Description: The cpp for p9
 */
 #include "P1.h"
-#include "P9a.h"
+#include "P9b.h"
 #include <iostream>
 
 using namespace std;
@@ -42,24 +42,9 @@ int Graph::ind(int x, int y) const{
 //Function to return the vertex id of a given label
 //Written by Zach modified by Parker
 int Graph::labelToVid(int label) const{
-    int rc = labels -> getIndex (label);
+    int rc = labels->getIndex(label);
     return rc;
 }
-    /*
-    bool check = isV(label);
-    if (check) {
-        for (int i = 0; i < vCount; i++) {
-            int key;
-            labels->readAt(i, key);
-            if (key == label) {
-                rc = i;
-            }
-        }
-    }
-    return rc;
-}
-*/
-
 //******************************************************************************
 //Public Functions
 //******************************************************************************
@@ -72,7 +57,7 @@ bool Graph::createV(int label) {
     if ((vCount < n) && (!check)) {
         labels->add(label);
         vCount++;
-        rc = true; // added
+        rc = true;
     }
     return rc;
 }
@@ -141,23 +126,9 @@ bool Graph::isEdge(int uLabel, int vLabel) const{
 //******************************************************************************
 //Function to check if there is a vertex at a given location
 //Written by Zach modified by Parker 
- bool Graph::isV(int label) const {
-    return labels->getIndex(label) != -1;
-    }
-
-    /*
-    int rc = false;
-    int key;
-    for (int i = 0; i < labels->count(); i++) {
-        int check = labels->readAt(i,key);
-        if (key == label) {
-            rc = true;
-        }
-    }
-    return rc;
+bool Graph::isV(int label) const {
+    return labels -> getIndex (label) != -1;
 }
-*/
-
 //******************************************************************************
 //Function to return the in degree of a given label
 //Written by Parker
