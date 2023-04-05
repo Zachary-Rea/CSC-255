@@ -138,33 +138,33 @@ bool Graph::isV(int label) const {
 //Function to return the in degree of a given label
 //Written by Parker
 int Graph::inDegree(int label) const{
-    int vVid = labelToVid(label);
-    int inD = 0;
-    for(int i = 0; i < n; i++){
-        if (vVid > 0){ 
-            inD++;
+    int inDeg = labelToVid(label);
+    int rc = -1;
+    if (inDeg >= 0) {
+        rc = 0;
+        for (int i = 0; i < vCount; i++) {
+            if (a[ind(i, inDeg)]) {
+                rc++;
             }
-        if(!vVid){
-            inD = -1;
-        }  
+        }
     }
-    return inD;
+    return rc;
 }
 //******************************************************************************
 //Function to return the out degree of a given label
 //Written by Parker
 int Graph::outDegree(int label) const{
-    int uVid = labelToVid(label);
-    int outD = 0;
-    for (int i = 0; i < n; i++){ 
-        if (uVid > 0){ 
-            outD++;
+    int outDeg = labelToVid(label);
+    int rc = -1;
+    if (outDeg >= 0) {
+        rc = 0;
+        for (int i = 0; i < vCount; i++) {
+            if (a[ind(outDeg, i)]) {
+                rc++;
             }
-            if(!uVid){
-            outD = -1; 
-        } 
-    } 
-    return outD;
+        }
+    }
+    return rc;
 }
 //******************************************************************************
 //Function to return the number of vertices possible
@@ -211,7 +211,7 @@ void Graph::printIt() const{
         int key;
         labels->readAt(r,key);
 	cout << "  Node(" << r << "," << key << "):";
-	cout << " " << inDegree(a[r]) << ", " << outDegree(a[r]) << endl;
+	cout << " " << inDegree(key) << ", " << outDegree(key) << endl;
     }
 }
 //******************************************************************************
