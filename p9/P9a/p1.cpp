@@ -132,5 +132,4 @@ int intList::readAt(int index, int &key) const{
 
 int intList::count() {
     return listSize;
-
 }

@@ -20,7 +20,7 @@ Graph::Graph(int n, bool directed) {
     this->n = n;
     this->directed = directed;
     labels = new intList(n);
-    a = new int[n*n]();
+    a = new int[n*n];
     clear();
 }
 //******************************************************************************
@@ -42,7 +42,10 @@ int Graph::ind(int x, int y) const{
 //Function to return the vertex id of a given label
 //Written by Zach modified by Parker
 int Graph::labelToVid(int label) const{
-    int rc = labels -> getIndex (label);
+    int rc = -1;
+    if (isV(label)) {
+        rc = labels->getIndex(label);
+    }
     return rc;
 }
 //******************************************************************************
@@ -121,16 +124,16 @@ bool Graph::isEdge(int uLabel, int vLabel) const{
     int uVid = labelToVid(uLabel);
     int vVid = labelToVid(vLabel);
     if ((uVid >= 0) && (vVid >= 0)){
-        rc = ind(a[uVid],a[vVid]) > 0;
+        rc = a[ind(uVid,vVid)] > 0;
     }  
     return rc;
 }
 //******************************************************************************
 //Function to check if there is a vertex at a given location
 //Written by Zach modified by Parker 
- bool Graph::isV(int label) const {
-    return labels->getIndex(label) != -1;
-    }
+bool Graph::isV(int label) const {
+    return (labels->getIndex(label) != -1);
+}
 //******************************************************************************
 //Function to return the in degree of a given label
 //Written by Parker
@@ -193,7 +196,9 @@ void Graph::printIt() const{
     cout << "  eCount = " << eCount << endl;
     cout << "\nGraph contents:\n";
     for (r = 0; r < vCount; r++) {
-	cout << "  Node(" << r << "," << a[r] << "):";
+        int key;
+        labels->readAt(r,key);
+	cout << "  Node(" << r << "," << key << "):";
 	for (c = 0; c < vCount; c++) {
 	    cout << " " << a[ind(r,c)];
 	}
@@ -203,7 +208,9 @@ void Graph::printIt() const{
     cout << "Degree table (in, out)\n";
 
     for (r = 0; r < vCount; r++) {
-	cout << "  Node(" << r << "," << a[r] << "):";
+        int key;
+        labels->readAt(r,key);
+	cout << "  Node(" << r << "," << key << "):";
 	cout << " " << inDegree(a[r]) << ", " << outDegree(a[r]) << endl;
     }
 }
