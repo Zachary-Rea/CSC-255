@@ -1,7 +1,7 @@
 /*
-Filename: p9b.cpp
+Filename: p9.cpp
 Author(s): Zachary Rea and Parker Ross
-Date: 4 April 2023
+Date: March 26 2023
 Description: The cpp for p9
 */
 #include "P1.h"
@@ -25,7 +25,7 @@ Graph::Graph(int n, bool directed) {
 }
 //******************************************************************************
 //Destructor
-//Written by Zach
+//Written by Zach modified by Parker
 Graph::~Graph() {
     delete[] a;
     delete labels;
@@ -42,15 +42,13 @@ int Graph::ind(int x, int y) const{
 //Function to return the vertex id of a given label
 //Written by Zach modified by Parker
 int Graph::labelToVid(int label) const{
-    int rc = labels->getIndex(label);
-    return rc;
+    return labels->getIndex(label);
 }
 //******************************************************************************
 //Public Functions
 //******************************************************************************
 //Function to create a vertex
 //Written by Zach
-
 bool Graph::createV(int label) {
     bool rc = false;
     bool check = isV(label);
@@ -63,20 +61,24 @@ bool Graph::createV(int label) {
 }
 //******************************************************************************
 //Function to add an edge between two vertices
-//Written by Zach
+//Written by Zach modified by Parker
 bool Graph::addEdge(int uLabel, int vLabel, int weight) {
     bool rc = false;
     bool checku = isV(uLabel);
     bool checkv = isV(vLabel);
     bool checkw = isEdge(uLabel,vLabel);
     if ((!checkw) && (weight > 0)) {
-        bool createu = true;
-        bool createv = true;
+        bool createu = false;
+        bool createv = false;
         if (!checku) {
             createu = createV(uLabel);
+        } else {
+            createu = true; 
         }
         if (!checkv) {
             createv =  createV(vLabel);
+        } else {
+            createv = true; 
         }
         if ((createu) && (createv)) {
             a[ind(labelToVid(uLabel),labelToVid(vLabel))] = weight;
@@ -113,13 +115,12 @@ void Graph::clear() {
 //******************************************************************************
 //Function to check if there is an edge between two vertices
 //Written by Parker
-
 bool Graph::isEdge(int uLabel, int vLabel) const{
     bool rc = false;
     int uVid = labelToVid(uLabel);
     int vVid = labelToVid(vLabel);
     if ((uVid >= 0) && (vVid >= 0)){
-        rc = ind(a[uVid],a[vVid]) > 0;
+        rc = a[ind(uVid,vVid)] > 0;
     }  
     return rc;
 }
@@ -127,39 +128,39 @@ bool Graph::isEdge(int uLabel, int vLabel) const{
 //Function to check if there is a vertex at a given location
 //Written by Zach modified by Parker 
 bool Graph::isV(int label) const {
-    return labels -> getIndex (label) != -1;
+    return (labels->getIndex(label) != -1);
 }
 //******************************************************************************
 //Function to return the in degree of a given label
 //Written by Parker
 int Graph::inDegree(int label) const{
-    int vVid = labelToVid(label);
-    int inD = 0;
-    for(int i = 0; i < n; i++){
-        if (vVid > 0){ 
-            inD++;
+    int inDeg = labelToVid(label);
+    int rc = -1;
+    if (inDeg >= 0) {
+        rc = 0;
+        for (int i = 0; i < vCount; i++) {
+            if (a[ind(i, inDeg)]) {
+                rc++;
             }
-        if(!vVid){
-            inD = -1;
-        }  
+        }
     }
-    return inD;
+    return rc;
 }
 //******************************************************************************
 //Function to return the out degree of a given label
 //Written by Parker
 int Graph::outDegree(int label) const{
-    int uVid = labelToVid(label);
-    int outD = 0;
-    for (int i = 0; i < n; i++){ 
-        if (uVid > 0){ 
-            outD++;
+    int outDeg = labelToVid(label);
+    int rc = -1;
+    if (outDeg != -1) {
+        rc = 0;
+        for (int i = 0; i < vCount; i++) {
+            if (a[ind(outDeg, i)]) {
+                rc++;
             }
-            if(!uVid){
-            outD = -1; 
-        } 
-    } 
-    return outD;
+        }
+    }
+    return rc;
 }
 //******************************************************************************
 //Function to return the number of vertices possible
@@ -191,7 +192,9 @@ void Graph::printIt() const{
     cout << "  eCount = " << eCount << endl;
     cout << "\nGraph contents:\n";
     for (r = 0; r < vCount; r++) {
-	cout << "  Node(" << r << "," << a[r] << "):";
+        int key;
+        labels->readAt(r,key);
+	cout << "  Node(" << r << "," << key << "):";
 	for (c = 0; c < vCount; c++) {
 	    cout << " " << a[ind(r,c)];
 	}
@@ -201,8 +204,10 @@ void Graph::printIt() const{
     cout << "Degree table (in, out)\n";
 
     for (r = 0; r < vCount; r++) {
-	cout << "  Node(" << r << "," << a[r] << "):";
-	cout << " " << inDegree(a[r]) << ", " << outDegree(a[r]) << endl;
+        int key;
+        labels->readAt(r,key);
+	cout << "  Node(" << r << "," << key << "):";
+	cout << " " << inDegree(key) << ", " << outDegree(key) << endl;
     }
 }
 //******************************************************************************
@@ -231,12 +236,4 @@ int max(int x, int y) {
     }
     return rc;
 }
-
-/*
-Dr. Wheat, we understand that the output does not match the correct
-output reguarding the in degree and out degreren functions.
-We also know that somewhere else in the code is causing the 
-ecount to be 3 above what it should We hope to make the necessary
-corrections for the 9b submission.
-*/
 
