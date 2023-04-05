@@ -45,13 +45,12 @@ bool intList::insert(int key) {
 //Fucntion to add an int to the end of the list
 //Written by Parker modified by Zach
 bool intList::add(int key) {
-    bool rc = false;
+    bool rc;
     if (listSize < listCapacity) { 
         a[listSize] = key;
         listSize++;
         rc = true;
     }
-    cerr << "rc is " << rc << endl;
     return rc;
 }
 //******************************************************************************
@@ -111,10 +110,9 @@ void intList::printIt(int n) const{
 //Written and modified by Zach
 int intList::getIndex(int key) const{
     int rc = -1;
-    for (int i = 0;i < listSize; i++) {
+    for (int i = 0;i < listSize - 1;i++) {
         if (a[i] == key) {
             rc = i;
-            cerr << "found " << key << endl;
             break;
         }
     }

@@ -54,13 +54,13 @@ int Graph::labelToVid(int label) const{
 //Function to create a vertex
 //Written by Zach
 bool Graph::createV(int label) {
-    bool rc = !isV(label);
-
-    if ((vCount < n) && (rc)) {
+    bool rc = false;
+    bool check = isV(label);
+    if ((vCount < n) && (!check)) {
         labels->add(label);
         vCount++;
+        rc = true;
     }
-    labels->printIt(1000);
     return rc;
 }
 //******************************************************************************

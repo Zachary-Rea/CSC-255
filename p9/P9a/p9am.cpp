@@ -19,7 +19,6 @@ main(int argc, char *argv[]) {
 	    // this is a node creation
 	    myGraph.createV(unode);
 	}
-	myGraph.printIt();
     }
     myGraph.printIt();
 
