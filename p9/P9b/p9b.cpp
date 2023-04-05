@@ -21,6 +21,7 @@ Graph::Graph(int n, bool directed) {
     this->directed = directed;
     labels = new intList(n);
     a = new int[n*n];
+    q = new iQ(n);
     clear();
 }
 //******************************************************************************
@@ -29,6 +30,7 @@ Graph::Graph(int n, bool directed) {
 Graph::~Graph() {
     delete[] a;
     delete labels;
+    delete q;
 }
 //******************************************************************************
 //Private Functions
@@ -36,13 +38,27 @@ Graph::~Graph() {
 //Function to return the mapping of x,y
 //Written by Zach
 int Graph::ind(int x, int y) const{
-    return x * n + y;
+    int rc = 0;
+    if (!directed) {
+        rc = min((x * n + y),(y * n + x));
+    } else {
+        rc = x * n + y;
+    }
+    return rc;
 }
 //******************************************************************************
 //Function to return the vertex id of a given label
 //Written by Zach modified by Parker
 int Graph::labelToVid(int label) const{
     int rc = labels->getIndex(label);
+    return rc;
+}
+//******************************************************************************
+//Function to return the label of a given vid
+//Written by Zach
+int Graph::vidToLabel(int vid) const{
+    int rc = -1;
+    labels->readAt(vid, rc);
     return rc;
 }
 //******************************************************************************
@@ -206,6 +222,24 @@ void Graph::printIt() const{
     }
 }
 //******************************************************************************
+//Function to do a breadth first print
+//Written by 
+void Graph::bfPrint(int label) const {
+
+}
+//******************************************************************************
+//Function to tell if there is a path between two nodes
+//Written by 
+bool Graph::isPath(int ulabel, int vlabel) const{
+
+}
+//******************************************************************************
+//Function to print the paths of the graph
+//Written by 
+void Graph::printPaths() const{
+
+}
+//******************************************************************************
 //Non-Member Functions
 //******************************************************************************
 //Function to return the min of two values
@@ -231,12 +265,3 @@ int max(int x, int y) {
     }
     return rc;
 }
-
-/*
-Dr. Wheat, we understand that the output does not match the correct
-output reguarding the in degree and out degreren functions.
-We also know that somewhere else in the code is causing the 
-ecount to be 3 above what it should We hope to make the necessary
-corrections for the 9b submission.
-*/
-
