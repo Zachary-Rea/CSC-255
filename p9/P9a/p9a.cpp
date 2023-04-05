@@ -20,12 +20,12 @@ Graph::Graph(int n, bool directed) {
     this->n = n;
     this->directed = directed;
     labels = new intList(n);
-    a = new int[n*n];
+    a = new int[n*n]();
     clear();
 }
 //******************************************************************************
 //Destructor
-//Written by Zach
+//Written by Zach modified by Parker
 Graph::~Graph() {
     delete[] a;
     delete labels;
@@ -45,53 +45,41 @@ int Graph::labelToVid(int label) const{
     int rc = labels -> getIndex (label);
     return rc;
 }
-    /*
-    bool check = isV(label);
-    if (check) {
-        for (int i = 0; i < vCount; i++) {
-            int key;
-            labels->readAt(i, key);
-            if (key == label) {
-                rc = i;
-            }
-        }
-    }
-    return rc;
-}
-*/
-
 //******************************************************************************
 //Public Functions
 //******************************************************************************
 //Function to create a vertex
 //Written by Zach
-
 bool Graph::createV(int label) {
     bool rc = false;
     bool check = isV(label);
     if ((vCount < n) && (!check)) {
         labels->add(label);
         vCount++;
-        rc = true; // added
+        rc = true;
     }
     return rc;
 }
 //******************************************************************************
 //Function to add an edge between two vertices
-//Written by Zach
+//Written by Zach modified by Parker
 bool Graph::addEdge(int uLabel, int vLabel, int weight) {
     bool rc = false;
     bool checku = isV(uLabel);
     bool checkv = isV(vLabel);
     bool checkw = isEdge(uLabel,vLabel);
     if ((!checkw) && (weight > 0)) {
-        bool createu = true;
-        bool createv = true;
+        bool createu = false;
+        bool createv = false;
         if (!checku) {
             createu = createV(uLabel);
+        } else {
+            createu = true; 
         }
         if (!checkv) {
             createv =  createV(vLabel);
+        } else {
+            createv = true; 
         }
         if ((createu) && (createv)) {
             a[ind(labelToVid(uLabel),labelToVid(vLabel))] = weight;
@@ -128,7 +116,6 @@ void Graph::clear() {
 //******************************************************************************
 //Function to check if there is an edge between two vertices
 //Written by Parker
-
 bool Graph::isEdge(int uLabel, int vLabel) const{
     bool rc = false;
     int uVid = labelToVid(uLabel);
@@ -144,20 +131,6 @@ bool Graph::isEdge(int uLabel, int vLabel) const{
  bool Graph::isV(int label) const {
     return labels->getIndex(label) != -1;
     }
-
-    /*
-    int rc = false;
-    int key;
-    for (int i = 0; i < labels->count(); i++) {
-        int check = labels->readAt(i,key);
-        if (key == label) {
-            rc = true;
-        }
-    }
-    return rc;
-}
-*/
-
 //******************************************************************************
 //Function to return the in degree of a given label
 //Written by Parker
@@ -260,12 +233,4 @@ int max(int x, int y) {
     }
     return rc;
 }
-
-/*
-Dr. Wheat, we understand that the output does not match the correct
-output reguarding the in degree and out degreren functions.
-We also know that somewhere else in the code is causing the 
-ecount to be 3 above what it should We hope to make the necessary
-corrections for the 9b submission.
-*/
 
