@@ -110,7 +110,7 @@ void intList::printIt(int n) const{
 //Written and modified by Zach
 int intList::getIndex(int key) const{
     int rc = -1;
-    for (int i = 0; i < listSize ;i++) {
+    for (int i = 0;i < listSize - 1;i++) {
         if (a[i] == key) {
             rc = i;
             break;
@@ -132,4 +132,5 @@ int intList::readAt(int index, int &key) const{
 
 int intList::count() {
     return listSize;
+
 }

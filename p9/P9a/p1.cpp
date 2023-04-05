@@ -111,11 +111,7 @@ void intList::printIt(int n) const{
 //Written and modified by Zach
 int intList::getIndex(int key) const{
     int rc = -1;
-<<<<<<< Updated upstream
     for (int i = 0;i < listSize; i++) {
-=======
-    for (int i = 0; i < listSize ;i++) {
->>>>>>> Stashed changes
         if (a[i] == key) {
             rc = i;
             cerr << "found " << key << endl;
