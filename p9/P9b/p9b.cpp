@@ -21,6 +21,7 @@ Graph::Graph(int n, bool directed) {
     this->directed = directed;
     labels = new intList(n);
     a = new int[n*n];
+    iQ *q = new iQ(vCount);
     clear();
 }
 //******************************************************************************
@@ -224,30 +225,81 @@ void Graph::printIt() const{
 }
 //******************************************************************************
 //Function to do a breadth first print
-//Written by 
+//Written by Zach
 void Graph::bfPrint(int label) const {
-
-    q.enq(0);
-    mark[0] = true;
-
-    while ((Vid = deq()) >= 0) {
-        mark [Vid] = true;
-        for (int i = 0; i < n; i++) {
-            if (!mark[i]) {
-                mark[i] = true;
-                q->enq(i);
+    q->clear();
+    int *traversal = new int[vCount];
+    int *mark = new int[vCount];
+    for (int i = 0; i < vCount; i++) {
+        traversal[i] = 0;
+        mark[i] = 0;
+    }
+    for (int i = 0; i < vCount; i++) {
+        if (traversal == 0) {
+            int vid = labelToVid(label);
+            q->enq(vid);
+            int j = 0;
+            int current = 0;
+            while (q->count() > 0) {
+                q->deq(current);
+                int lab = vidToLabel(current);
+                cout << "Item " << x << " is (" << current << "," << 
+                lab << ")\n";
+                x++;
+                for (int i = 0; i < vCount; i++) {
+                    if (isEdge((lab), vidToLabel(i))) {
+                        if (mark[i] == 0) {
+                            mark[i] = 1;
+                            q->enq(i);
+                        }
+                    }
+                }
+            }
+            for (int j = 0; j < vCount; j++) {
+                if (mark[j] == 1) {
+                    traversal[j] = 1; 
+                }
             }
         }
-        cout << vidToLabel(Vid) << " ";
     }
-    cout << endl;
+    q->clear();
 }
 //******************************************************************************
 //Function to tell if there is a path between two nodes
 //Written by 
 bool Graph::isPath(int ulabel, int vlabel) const{
-
-return 0;
+    q->clear();
+    bool rc = false;
+    bool check1 = isV(ulabel);
+    bool check2 = isV(vlabel);
+    if (check1 && check2) {
+        int vid = labelToVid(ulabel);
+        int *mark = new int[n];
+        for (int i = 0; i < n; i++) {
+            mark[i] = 0;
+        }
+        q->enq(vid);
+        mark[vid] = 1;
+        int x = 0;
+        int current = 0;
+        while (q->count() > 0) {
+            q->deq(current);
+            if (vidToLabel(current) == vlabel) {
+                rc = true;
+                break;
+            }
+            for (int i = 0; i < n; i++) {
+                lab = vidToLabel(current);
+                if (isEdge(lab, vidToLabel(i))) {
+                    if (mark[i] == 0) {
+                        mark[i] = 1;
+                        q->enq(i);
+                    }
+                }
+            }
+        }
+    }
+    return rc;
 }
 //******************************************************************************
 //Function to print the paths of the graph
