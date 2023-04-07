@@ -303,11 +303,11 @@ bool Graph::isPath(int ulabel, int vlabel) const{
 }
 //******************************************************************************
 //Function to print the paths of the graph
-//Written by 
+//Written by Parker
 void Graph::printPaths() const{
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            if (isPath(labeltoVid[i], label[j])) {
+            if (isPath(vidToLabel[i], vidToLabel[j])) {
                 cout << label[i] << " does have a path to " << label[j] << endl;
             } else {
                 cout << label[i] << " does not have a path to " << label[j] << endl;
