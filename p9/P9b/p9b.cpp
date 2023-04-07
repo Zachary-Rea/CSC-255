@@ -224,38 +224,37 @@ void Graph::printIt() const{
 }
 //******************************************************************************
 //Function to do a breadth first print
-//Written by 
+//Written by Parker
 void Graph::bfPrint(int label) const {
+    cout << "Printing from " << label << endl;
+    int key;
+    labels->read(label, key);
+    cout << "Item is (" << label << "," << key << ")" << endl;
 
     q.enq(0);
-    mark[0] = true;
-
-    while ((Vid = deq()) >= 0) {
-        mark [Vid] = true;
-        for (int i = 0; i < n; i++) {
-            if (!mark[i]) {
-                mark[i] = true;
-                q->enq(i);
+    bool mark [0]= true;
+    while ((Vid = deq()) >= 0 ){
+        for (int i = 0; i < n; i++){
+            if (!mark[i]){
+                mark [i] = true;
+                q -> enq (i);
             }
         }
-        cout << vidToLabel(Vid) << " ";
     }
-    cout << endl;
 }
 //******************************************************************************
 //Function to tell if there is a path between two nodes
 //Written by 
 bool Graph::isPath(int ulabel, int vlabel) const{
-
 return 0;
 }
 //******************************************************************************
 //Function to print the paths of the graph
-//Written by 
+//Written by Parker
 void Graph::printPaths() const{
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            if (isPath(labeltoVid[i], label[j])) {
+            if (isPath(vidToLabel[i], vidToLabel[j])) {
                 cout << label[i] << " does have a path to " << label[j] << endl;
             } else {
                 cout << label[i] << " does not have a path to " << label[j] << endl;
