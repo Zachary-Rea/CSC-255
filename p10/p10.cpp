@@ -60,10 +60,34 @@ int Graph::vidToLabel(int vid) const{
 }
 //******************************************************************************
 //Function to populate lambda with the distances to all other nodes
-//Written by 
+//Written by Zach
 void Graph::dijkstra(int s) {
-    if (s < vCount && s >= 0) {
-
+    if (isV(vidToLabel(s))) {
+        for (int i = 0; i < vCount; i++) {
+            lambda[i] = INFINITE;
+            set[i] = Y;
+        }
+        lambda[s] = 0;
+        set[s] = X;
+        for (int i = 0; i < vCount; i++) {
+            int key;
+            labels->readAt(i,key);
+            if (isEdge(vidToLabel(s),key)) {
+                lambda[i] = a[ind(s,labelToVid(key))];
+            }
+        }
+        int minV;
+        while(minLambdaY(minV)) {
+            for (int i = 0; i < vCount; i++) {
+                minLambdaY(minV);
+                set[minV] = X;
+                int key;
+                labels->readAt(i,key);
+                if (isEdge(vidToLabel(minV),key)) {
+                    lambda[i] = min(a[ind(minV,labelToVid(key))]+lambda[minV],lambda[i]);
+                }
+            }
+        }
     }
 }
 //******************************************************************************
@@ -76,9 +100,9 @@ bool Graph::minLambdaY(int &minV) {
         for (int i = 0; i < vCount; i++) {
             if (set[i] == Y) {
                 if (minV == -1) {
-                    minV = lambda[i];
+                    minV = i;
                 }
-                minV = min(lambda[i],minV);
+                minV = min(i,minV);
                 rc = true;
             }
         }
