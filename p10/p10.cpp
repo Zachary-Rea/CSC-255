@@ -68,7 +68,7 @@ void Graph::dijkstra(int s) {
 }
 //******************************************************************************
 //Function to return the minimum value of Y 
-//Written by 
+//Written by Zach
 bool Graph::minLambdaY(int &minV) {
     bool rc = false;
     minV = -1;
@@ -353,7 +353,7 @@ void Graph::printPaths() const{
 }
 //******************************************************************************
 //Function to return the distance between two nodes
-//Written by 
+//Written by Zach
 bool Graph::dijkstra(int sLabel, int dLabel, int &distance) {
     bool rc = false;
     distance = -1;
