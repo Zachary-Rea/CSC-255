@@ -60,7 +60,7 @@ int Graph::vidToLabel(int vid) const{
 }
 //******************************************************************************
 //Function to populate lambda with the distances to all other nodes
-//Written by Zach
+//Written by Parker and Zach
 void Graph::dijkstra(int s) {
     if (isV(vidToLabel(s))) {
         for (int i = 0; i < vCount; i++) {
@@ -76,11 +76,11 @@ void Graph::dijkstra(int s) {
                 lambda[i] = a[ind(s,labelToVid(key))];
             }
         }
+
         int minV;
         while(minLambdaY(minV)) {
+            set[minV] = X;
             for (int i = 0; i < vCount; i++) {
-                minLambdaY(minV);
-                set[minV] = X;
                 int key;
                 labels->readAt(i,key);
                 if (isEdge(vidToLabel(minV),key)) {
@@ -414,8 +414,6 @@ int max(int x, int y) {
     return rc;
 }
 
-/* Professor, 
-we understand that the output is incorrect, but we were unfortunately 
-unable to fix this with the extra time. We are going to keep working 
-on fixing this over the rest of the weekend since p10 relies so 
-heavily on it's function. */
+/* Professor, /* Professor, 
+we understand that the output is incorrect, 
+we hope to apply corrections to dijkstra by the time p11 is due. */
