@@ -227,7 +227,7 @@ void Graph::printIt() const{
 //Function to do a breadth first print
 //Written by Zach
 void Graph::bfPrint(int label) const {
-    q->clear();
+    iQ *q = new iQ(vCount);
     int *traversal = new int[vCount];
     int *mark = new int[vCount];
     for (int i = 0; i < vCount; i++) {
@@ -235,7 +235,7 @@ void Graph::bfPrint(int label) const {
         mark[i] = 0;
     }
     for (int i = 0; i < vCount; i++) {
-        if (traversal == 0) {
+        if (traversal[i] == 0) {
             int vid = labelToVid(label);
             q->enq(vid);
             int j = 0;
@@ -243,7 +243,7 @@ void Graph::bfPrint(int label) const {
             while (q->count() > 0) {
                 q->deq(current);
                 int lab = vidToLabel(current);
-                cout << "Item " << j << " is (" << current << "," << 
+                cout << "\t\t\tItem " << j << " is (" << current << "," << 
                 lab << ")\n";
                 j++;
                 for (int i = 0; i < vCount; i++) {
@@ -262,20 +262,19 @@ void Graph::bfPrint(int label) const {
             }
         }
     }
-    q->clear();
 }
 //******************************************************************************
 //Function to tell if there is a path between two nodes
-//Written by 
+//Written by Zach
 bool Graph::isPath(int ulabel, int vlabel) const{
-    q->clear();
+    iQ *q = new iQ(vCount);
     bool rc = false;
     bool check1 = isV(ulabel);
     bool check2 = isV(vlabel);
     if (check1 && check2) {
         int vid = labelToVid(ulabel);
-        int *mark = new int[n];
-        for (int i = 0; i < n; i++) {
+        int *mark = new int[vCount];
+        for (int i = 0; i < vCount; i++) {
             mark[i] = 0;
         }
         q->enq(vid);
@@ -288,7 +287,7 @@ bool Graph::isPath(int ulabel, int vlabel) const{
                 rc = true;
                 break;
             }
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < vCount; i++) {
                 int lab = vidToLabel(current);
                 if (isEdge(lab, vidToLabel(i))) {
                     if (mark[i] == 0) {
@@ -305,8 +304,8 @@ bool Graph::isPath(int ulabel, int vlabel) const{
 //Function to print the paths of the graph
 //Written by Parker
 void Graph::printPaths() const{
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
+    for (int i = 0; i < vCount; i++) {
+        for (int j = 0; j < vCount; j++) {
             if (isPath(vidToLabel(i), vidToLabel(j))) {
                 int key = 0;
                 labels->readAt(i,key);
