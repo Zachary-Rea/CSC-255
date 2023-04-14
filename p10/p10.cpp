@@ -21,6 +21,8 @@ Graph::Graph(int n, bool directed) {
     labels = new intList(n);
     a = new int[n*n];
     iQ *q = new iQ(vCount);
+    lambda = new int[n];
+    set = new int[n];
     clear();
 }
 //******************************************************************************
@@ -54,6 +56,33 @@ int Graph::labelToVid(int label) const{
 int Graph::vidToLabel(int vid) const{
     int rc = -1;
     labels->readAt(vid, rc);
+    return rc;
+}
+//******************************************************************************
+//Function to populate lambda with the distances to all other nodes
+//Written by 
+void Graph::dijkstra(int s) {
+    if (s < vCount && s >= 0) {
+
+    }
+}
+//******************************************************************************
+//Function to return the minimum value of Y 
+//Written by 
+bool Graph::minLambdaY(int &minV) {
+    bool rc = false;
+    minV = -1;
+    if (set) {
+        for (int i = 0; i < vCount; i++) {
+            if (set[i] == Y) {
+                if (minV == -1) {
+                    minV = lambda[i];
+                }
+                minV = min(lambda[i],minV);
+                rc = true;
+            }
+        }
+    }
     return rc;
 }
 //******************************************************************************
@@ -322,7 +351,19 @@ void Graph::printPaths() const{
         }
     }
 }
-
+//******************************************************************************
+//Function to return the distance between two nodes
+//Written by 
+bool Graph::dijkstra(int sLabel, int dLabel, int &distance) {
+    bool rc = false;
+    distance = -1;
+    if ((isV(sLabel) && isV(dLabel))) {
+        dijkstra(labelToVid(sLabel));
+        distance = lambda[(labelToVid(dLabel))];
+        rc = true;
+    }
+    return rc;
+}
 //******************************************************************************
 //Non-Member Functions
 //******************************************************************************
