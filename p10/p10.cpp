@@ -67,7 +67,7 @@ void Graph::dijkstra(int s) {
     }
 }
 //******************************************************************************
-//Function to return the minimum value of Y 
+//Function to return the minimum value of Y in lambda
 //Written by Zach
 bool Graph::minLambdaY(int &minV) {
     bool rc = false;
@@ -299,7 +299,7 @@ bool Graph::isPath(int ulabel, int vlabel) const{
     bool rc = false;
     bool check1 = isV(ulabel);
     bool check2 = isV(vlabel);
-    if (check1 && check2) {
+    if ((check1 && check2) && (vlabel != ulabel)) {
         int vid = labelToVid(ulabel);
         int *mark = new int[vCount];
         for (int i = 0; i < vCount; i++) {

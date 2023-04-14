@@ -227,41 +227,7 @@ void Graph::printIt() const{
 //Function to do a breadth first print
 //Written by Zach
 void Graph::bfPrint(int label) const {
-    iQ *q = new iQ(vCount);
-    int *traversal = new int[vCount];
-    int *mark = new int[vCount];
-    for (int i = 0; i < vCount; i++) {
-        traversal[i] = 0;
-        mark[i] = 0;
-    }
-    for (int i = 0; i < vCount; i++) {
-        if (traversal[i] == 0) {
-            int vid = labelToVid(label);
-            q->enq(vid);
-            int j = 0;
-            int current = 0;
-            while (q->count() > 0) {
-                q->deq(current);
-                int lab = vidToLabel(current);
-                cout << "\t\t\tItem " << j << " is (" << current << "," << 
-                lab << ")\n";
-                j++;
-                for (int i = 0; i < vCount; i++) {
-                    if (isEdge((lab), vidToLabel(i))) {
-                        if (mark[i] == 0) {
-                            mark[i] = 1;
-                            q->enq(i);
-                        }
-                    }
-                }
-            }
-            for (int j = 0; j < vCount; j++) {
-                if (mark[j] == 1) {
-                    traversal[j] = 1; 
-                }
-            }
-        }
-    }
+    q->count();
 }
 //******************************************************************************
 //Function to tell if there is a path between two nodes
