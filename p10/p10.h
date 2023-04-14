@@ -20,12 +20,21 @@ class Graph {
         int vCount;
         int eCount;
         bool directed;
+        //New Variables For P10
+        int *lambda;
+        int *set;
+        int const INFINITE = 1000000;
+        int const X = 0;
+        int const Y = 1;
         //Functions
         int ind(int x, int y) const;
         int labelToVid(int label) const;
         int vidToLabel(int vid) const;
+        //New Functions For P10
+        void dijkstra(int s);
+        bool minLambdaY(int &minV);
     public:
-        //functions
+        //Functions
         Graph(int n = 100, bool directed = true);
         ~Graph();
         bool createV(int label);
@@ -43,5 +52,7 @@ class Graph {
         void bfPrint(int label) const;
         bool isPath(int ulabel, int vlabel) const;
         void printPaths() const;
+        //New For P10
+        bool dijkstra(int sLabel, int dLabel, int &distance);
 };
 #endif
