@@ -72,18 +72,16 @@ void Graph::dijkstra(int s) {
         set[s] = X;
         for (int i = 0; i < vCount; i++) {
             int key = vidToLabel(s);
-            labels->readAt(i,key);
             if (isEdge(vidToLabel(s),key)) {
                 lambda[i] = a[ind(s,labelToVid(key))];
             }
         }
-
+        lambda[s] != 0;
         int minV;
         while(minLambdaY(minV)) {
             set[minV] = X;
             for (int i = 0; i < vCount; i++) {
                 int key  = vidToLabel(s);
-                labels->readAt(i,key);
                 if (isEdge(vidToLabel(minV),key)) {
                     lambda[i] = min(a[ind(minV,i)]+lambda[minV],lambda[i]);
                 }
@@ -96,12 +94,13 @@ void Graph::dijkstra(int s) {
 //Written by Zach modified by Parker
 bool Graph::minLambdaY(int &minV) {
     bool rc = false;
-    minV = INFINITE;
+    minV = -1;
+    int minVal = INFINITE;
         for (int i = 0; i < vCount; i++) {
-            if (set[i] == Y) {
-               if (lambda[i]<= minV){
+            if ((set[i] == Y) && (lambda[i] <= minVal)) {
+               if (lambda[i] <= minV){
                 minV = i;
-                minV = lambda[i];
+                minVal = lambda[i];
                 rc = true;
                }
             }

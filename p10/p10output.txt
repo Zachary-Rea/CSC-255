@@ -84,3 +84,48 @@ Degree table (in, out)
 *** end of bfPrint() output
 *** start of minPath output
    MinPaths for 10
+      to 10: 0
+      to 20: 1000000
+      to 30: 1000000
+      to 40: 1000000
+      to 50: 1000000
+      to 60: 1000000
+   MinPaths for 20
+      to 10: 1000000
+      to 20: 0
+      to 30: 1000000
+      to 40: 1000000
+      to 50: 1000000
+      to 60: 1000000
+   MinPaths for 30
+      to 10: 1000000
+      to 20: 1000000
+      to 30: 0
+      to 40: 1000000
+      to 50: 1000000
+      to 60: 1000000
+   MinPaths for 40
+      to 10: 1000000
+      to 20: 1000000
+      to 30: 1000000
+      to 40: 0
+      to 50: 1000000
+      to 60: 1000000
+   MinPaths for 50
+      to 10: 1000000
+      to 20: 1000000
+      to 30: 1000000
+      to 40: 1000000
+      to 50: 0
+      to 60: 1000000
+   MinPaths for 60
+      to 10: 1000000
+      to 20: 1000000
+      to 30: 1000000
+      to 40: 1000000
+      to 50: 1000000
+      to 60: 0
+*** end of minPath() output
+*** start of isCyclic output
+This program version does not do isCyclic testing.
+*** end of isCyclic output
