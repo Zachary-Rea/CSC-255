@@ -1,10 +1,10 @@
 /*
-Filename: p10.cpp
+Filename: p11.cpp
 Author(s): Zachary Rea and Parker Ross
-Date: April 2023
+Date: April 19 2023
 Description: The cpp for p11
 */
-#include "P10.h"
+#include "P11.h"
 #include <iostream>
 
 using namespace std;
@@ -342,7 +342,7 @@ bool Graph::isPath(int ulabel, int vlabel) const{
 }
 //******************************************************************************
 //Function to print the paths of the graph
-//Written by Parker
+//Written and modified by Parker
 void Graph::printPaths() const{
     for (int i = 0; i < vCount; i++) {
         for (int j = 0; j < vCount; j++) {
