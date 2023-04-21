@@ -20,7 +20,6 @@ class Graph {
         int vCount;
         int eCount;
         bool directed;
-        //New Variables For P10
         int *lambda;
         int *set;
         int const INFINITE = 1000000;
@@ -30,16 +29,18 @@ class Graph {
         int ind(int x, int y) const;
         int labelToVid(int label) const;
         int vidToLabel(int vid) const;
-        //New Functions For P10
         void dijkstra(int s);
         bool minLambdaY(int &minV);
+        //New for P11
+        bool isCyclicDirected();
+        bool isCyclicUndirected();
     public:
         //Functions
         Graph(int n = 100, bool directed = true);
         ~Graph();
         bool createV(int label);
         bool addEdge(int uLabel, int vLabel, int weight);
-        bool deleteEdge(int uLabel, int vLabel);
+        bool deleteEdge(int uLabel, int vLabel, int &weight);
         void clear();
         bool isEdge(int uLabel, int vLabel) const;
         bool isV(int Label) const;
@@ -52,7 +53,9 @@ class Graph {
         void bfPrint(int label) const;
         bool isPath(int ulabel, int vlabel) const;
         void printPaths() const;
-        //New For P10
         bool dijkstra(int sLabel, int dLabel, int &distance);
+        //New for P11
+        int degree(int label);
+        bool isCyclic();
 };
 #endif

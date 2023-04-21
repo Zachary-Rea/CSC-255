@@ -40,7 +40,13 @@ Graph::~Graph() {
 //Function to return the mapping of x,y
 //Written by Zach
 int Graph::ind(int x, int y) const{
-    return x * n + y;
+    int rc = 0;
+    if (directed) {
+        rc = x * n + y;
+    } else {
+        rc = x<y?x*n+y:y*n+x;
+    }
+    return rc;
 }
 //******************************************************************************
 //Function to return the vertex id of a given label
@@ -99,14 +105,26 @@ bool Graph::minLambdaY(int &minV) {
     minV = INFINITE;
         for (int i = 0; i < vCount; i++) {
             if (set[i] == Y) {
-               if (lambda[i]<= minV){
-                minV = i;
-                minV = lambda[i];
-                rc = true;
-               }
+                if (lambda[i]<= minV){
+                    minV = i;
+                    minV = lambda[i];
+                    rc = true;
+                }
             }
         }
     return rc;
+}
+//******************************************************************************
+//Function to check if directed graph is cyclic
+//Written by 
+bool Graph::isCyclicDirected() {
+
+}
+//******************************************************************************
+//Function to check if undirected graph is cyclic
+//Written by 
+bool Graph::isCyclicUndirected() {
+
 }
 //******************************************************************************
 //Public Functions
@@ -155,10 +173,11 @@ bool Graph::addEdge(int uLabel, int vLabel, int weight) {
 //******************************************************************************
 //Function to delete an edge between two vertices
 //Written by Zach
-bool Graph::deleteEdge(int uLabel, int vLabel) {
+bool Graph::deleteEdge(int uLabel, int vLabel, int &weight) {
     bool rc = false;
     bool checkw = isEdge(uLabel,vLabel);
     if (checkw) {
+        weight = a[ind(labelToVid(uLabel),labelToVid(vLabel))];
         a[ind(labelToVid(uLabel),labelToVid(vLabel))] = 0;
         eCount--;
         rc = true;
@@ -200,7 +219,7 @@ bool Graph::isV(int label) const {
 int Graph::inDegree(int label) const{
     int inDeg = labelToVid(label);
     int rc = -1;
-    if (inDeg >= 0) {
+    if ((inDeg >= 0) && (directed)) {
         rc = 0;
         for (int i = 0; i < vCount; i++) {
             if (a[ind(i, inDeg)]) {
@@ -216,7 +235,7 @@ int Graph::inDegree(int label) const{
 int Graph::outDegree(int label) const{
     int outDeg = labelToVid(label);
     int rc = -1;
-    if (outDeg >= 0) {
+    if ((outDeg >= 0) && (directed)) {
         rc = 0;
         for (int i = 0; i < vCount; i++) {
             if (a[ind(outDeg, i)]) {
@@ -372,6 +391,27 @@ bool Graph::dijkstra(int sLabel, int dLabel, int &distance) {
         rc = true;
     }
     return rc;
+}
+//******************************************************************************
+//Function to return the degree of a vertex in undirected graph
+//Written by Zach
+int Graph::degree(int label) {
+    int rc = -1;
+    if ((!directed) && (isV(label))) {
+        rc = 0;
+        for (int i = 0; i < vCount; i++) {
+            if ((i != labelToVid(label)) && (isEdge(label,vidToLabel(i)))) {
+                rc++;
+            }
+        }
+    }
+    return rc;
+}
+//******************************************************************************
+//Function to call the cyclic checkers respectively
+//Written by Zach
+bool Graph::isCyclic() {
+    return directed?isCyclicDirected:isCyclicUndirected;
 }
 //******************************************************************************
 //Non-Member Functions
