@@ -49,7 +49,7 @@ class Graph {
         int sizeV() const;
         int sizeUsedV() const;
         int sizeE() const;
-        void printIt() const;
+        void printIt();
         void bfPrint(int label) const;
         bool isPath(int ulabel, int vlabel) const;
         void printPaths() const;

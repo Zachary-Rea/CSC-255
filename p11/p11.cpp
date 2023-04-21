@@ -1,16 +1,16 @@
 /*
 Filename: p11.cpp
 Author(s): Zachary Rea and Parker Ross
-Date: April 19 2023
+Date:20 April 2023
 Description: The cpp for p11
 */
 #include "P11.h"
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
 //Graph class
-
 //******************************************************************************
 //Constructors and Destructors
 //******************************************************************************
@@ -78,18 +78,16 @@ void Graph::dijkstra(int s) {
         set[s] = X;
         for (int i = 0; i < vCount; i++) {
             int key = vidToLabel(s);
-            labels->readAt(i,key);
             if (isEdge(vidToLabel(s),key)) {
                 lambda[i] = a[ind(s,labelToVid(key))];
             }
         }
-
+        lambda[s] != 0;
         int minV;
         while(minLambdaY(minV)) {
             set[minV] = X;
             for (int i = 0; i < vCount; i++) {
                 int key  = vidToLabel(s);
-                labels->readAt(i,key);
                 if (isEdge(vidToLabel(minV),key)) {
                     lambda[i] = min(a[ind(minV,i)]+lambda[minV],lambda[i]);
                 }
@@ -102,29 +100,40 @@ void Graph::dijkstra(int s) {
 //Written by Zach modified by Parker
 bool Graph::minLambdaY(int &minV) {
     bool rc = false;
-    minV = INFINITE;
+    minV = -1;
+    int minVal = INFINITE;
         for (int i = 0; i < vCount; i++) {
-            if (set[i] == Y) {
-                if (lambda[i]<= minV){
-                    minV = i;
-                    minV = lambda[i];
-                    rc = true;
-                }
+            if ((set[i] == Y) && (lambda[i] <= minVal)) {
+                minV = i;
+                minVal = lambda[i];
+                rc = true;
             }
         }
     return rc;
 }
 //******************************************************************************
 //Function to check if directed graph is cyclic
-//Written by 
+//Written by Zach
 bool Graph::isCyclicDirected() {
-
+    bool rc = false;
+    for (int i = 1; i < vCount; i++) {
+        if (isPath(vidToLabel(i),vidToLabel(i))) {
+            rc = true;
+        }
+    }
+    return rc;
 }
 //******************************************************************************
 //Function to check if undirected graph is cyclic
-//Written by 
+//Written by Zach
 bool Graph::isCyclicUndirected() {
-
+    bool rc = false;
+    for (int i = 1; i < vCount; i++) {
+        if (isPath(vidToLabel(i),vidToLabel(i))) {
+            rc = true;
+        }
+    }
+    return rc;
 }
 //******************************************************************************
 //Public Functions
@@ -215,7 +224,7 @@ bool Graph::isV(int label) const {
 }
 //******************************************************************************
 //Function to return the in degree of a given label
-//Written by Parker
+//Written by Zach
 int Graph::inDegree(int label) const{
     int inDeg = labelToVid(label);
     int rc = -1;
@@ -266,7 +275,7 @@ int Graph::sizeE() const{
 //******************************************************************************
 //Function to print the contents of the graph 
 //Written by Zach
-void Graph::printIt() const{
+void Graph::printIt() {
     int r, c;
 
     cout << "Graph info:\n";
@@ -279,18 +288,22 @@ void Graph::printIt() const{
         labels->readAt(r,key);
 	cout << "  Node(" << r << "," << key << "):";
 	for (c = 0; c < vCount; c++) {
-	    cout << " " << a[ind(r,c)];
+        if (c > r) {
+            cout << "  " << a[ind(r,c)];
+        } else {
+            cout << "  0";
+        }
 	}
 	cout << endl;
     }
 
-    cout << "Degree table (in, out)\n";
+    cout << "Degree table (normal, in, out)\n";
 
     for (r = 0; r < vCount; r++) {
         int key;
         labels->readAt(r,key);
 	cout << "  Node(" << r << "," << key << "):";
-	cout << " " << inDegree(key) << ", " << outDegree(key) << endl;
+	cout << "     " << degree(key) << ", " << inDegree(key) << ", " << outDegree(key) << endl;
     }
 }
 //******************************************************************************
@@ -309,13 +322,13 @@ void Graph::bfPrint(int label) const {
             while (q->count() > 0) {
                 q->deq(current);
                 int lab = vidToLabel(current);
-                cout << "\t\t\tItem " << j << " is (" << current << "," << 
+                cout << "\t\t\t Item " << j << " is (" << current << "," << 
                 lab << ")\n";
                 j++;
                 for (int i = 0; i < vCount; i++) {
                     if (isEdge((lab), vidToLabel(i))) {
-                        if (mark[i] == true) {
-                            mark[i] = false;
+                        if (mark[i] == false) {
+                            mark[i] = true;
                             q->enq(i);
                         }
                     }
@@ -328,9 +341,14 @@ void Graph::bfPrint(int label) const {
 bool Graph::isPath(int ulabel, int vlabel) const{
     iQ *q = new iQ(vCount);
     bool rc = false;
+    if (directed) {
+        if ((isEdge(ulabel,vlabel)) && (ulabel == vlabel)) {
+            rc = true;
+        }
+    }
     bool check1 = isV(ulabel);
     bool check2 = isV(vlabel);
-    if ((check1 && check2)) {
+    if ((check1 && check2) && (ulabel != vlabel)) {
         int vid = labelToVid(ulabel);
         bool *mark = new bool [vCount];
         for (int i = 0; i < vCount; i++) {
@@ -338,7 +356,6 @@ bool Graph::isPath(int ulabel, int vlabel) const{
         }
         q->enq(vid);
         mark[vid] = true;
-        int x = 0;
         int current;
         while (q->count() > 0) {
             q->deq(current);
@@ -361,7 +378,7 @@ bool Graph::isPath(int ulabel, int vlabel) const{
 }
 //******************************************************************************
 //Function to print the paths of the graph
-//Written and modified by Parker
+//Written by Parker
 void Graph::printPaths() const{
     for (int i = 0; i < vCount; i++) {
         for (int j = 0; j < vCount; j++) {
@@ -411,7 +428,7 @@ int Graph::degree(int label) {
 //Function to call the cyclic checkers respectively
 //Written by Zach
 bool Graph::isCyclic() {
-    return directed?isCyclicDirected:isCyclicUndirected;
+    return (directed?isCyclicDirected():isCyclicUndirected());
 }
 //******************************************************************************
 //Non-Member Functions
